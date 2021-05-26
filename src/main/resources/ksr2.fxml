@@ -11,9 +11,9 @@
     <children>
         <Button layoutX="88.0" layoutY="439.0" mnemonicParsing="false" onAction="#loadData" prefHeight="71.0" prefWidth="78.0" text="Load data" />
       <Button layoutX="180.0" layoutY="439.0" mnemonicParsing="false" onAction="#chooseSummarizers" prefHeight="71.0" prefWidth="78.0" text="Summarizers" />
-      <Button layoutX="270.0" layoutY="439.0" mnemonicParsing="false" prefHeight="71.0" prefWidth="78.0" text="Qualifiers" />
-      <Button layoutX="363.0" layoutY="439.0" mnemonicParsing="false" onAction="#test" prefHeight="71.0" prefWidth="78.0" text="Generete" />
-      <ListView layoutX="20.0" layoutY="491.0" prefHeight="295.0" prefWidth="1300.0" />
+      <Button layoutX="270.0" layoutY="439.0" mnemonicParsing="false" onAction="#chooseQualifiers" prefHeight="71.0" prefWidth="78.0" text="Qualifiers" />
+      <Button layoutX="363.0" layoutY="439.0" mnemonicParsing="false" onAction="#generate" prefHeight="71.0" prefWidth="78.0" text="Generete" />
+      <ListView fx:id="summList" layoutX="20.0" layoutY="491.0" prefHeight="295.0" prefWidth="1300.0" />
       <Label layoutX="20.0" layoutY="474.0" prefHeight="17.0" prefWidth="1300.0" text="Summaries" />
       <Label layoutX="20.0" layoutY="229.0" text="Qaulifiers" />
       <Label layoutX="20.0" layoutY="6.0" text="Summarizers" />

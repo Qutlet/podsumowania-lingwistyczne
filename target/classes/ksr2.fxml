@@ -7,16 +7,16 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
 
-<AnchorPane prefHeight="858.0" prefWidth="1799.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mbjs.Ksr2">
+<AnchorPane prefHeight="858.0" prefWidth="1386.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mbjs.Ksr2">
     <children>
-        <Button layoutX="299.0" layoutY="439.0" mnemonicParsing="false" onAction="#loadData" prefHeight="71.0" prefWidth="78.0" text="Load data" />
-      <Button layoutX="211.0" layoutY="439.0" mnemonicParsing="false" onAction="#chooseSummarizers" prefHeight="71.0" prefWidth="78.0" text="Summarizers" />
-      <Button layoutX="122.0" layoutY="439.0" mnemonicParsing="false" onAction="#chooseQualifiers" prefHeight="71.0" prefWidth="78.0" text="Qualifiers" />
-      <Button layoutX="35.0" layoutY="439.0" mnemonicParsing="false" onAction="#test" prefHeight="71.0" prefWidth="78.0" text="Generete" />
-      <ListView layoutX="20.0" layoutY="491.0" prefHeight="295.0" prefWidth="1300.0" />
+        <Button layoutX="88.0" layoutY="439.0" mnemonicParsing="false" onAction="#loadData" prefHeight="71.0" prefWidth="78.0" text="Load data" />
+      <Button layoutX="180.0" layoutY="439.0" mnemonicParsing="false" onAction="#chooseSummarizers" prefHeight="71.0" prefWidth="78.0" text="Summarizers" />
+      <Button layoutX="270.0" layoutY="439.0" mnemonicParsing="false" onAction="#chooseQualifiers" prefHeight="71.0" prefWidth="78.0" text="Qualifiers" />
+      <Button layoutX="363.0" layoutY="439.0" mnemonicParsing="false" onAction="#generate" prefHeight="71.0" prefWidth="78.0" text="Generete" />
+      <ListView fx:id="summList" layoutX="20.0" layoutY="491.0" prefHeight="295.0" prefWidth="1300.0" />
       <Label layoutX="20.0" layoutY="474.0" prefHeight="17.0" prefWidth="1300.0" text="Summaries" />
-      <Label layoutX="450.0" layoutY="237.0" text="Qaulifiers" />
-      <Label layoutX="450.0" layoutY="6.0" text="Summarizers" />
+      <Label layoutX="20.0" layoutY="229.0" text="Qaulifiers" />
+      <Label layoutX="20.0" layoutY="6.0" text="Summarizers" />
        <Pane layoutX="20.0" layoutY="23.0" prefHeight="200.0" prefWidth="1344.0" style="-fx-background-color: lightgrey;">
           <children>
              <CheckBox fx:id="summ1" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" text="a few GP" />
@@ -81,7 +81,7 @@
             <CheckBox fx:id="summ60" layoutX="1232.0" layoutY="90.0" mnemonicParsing="false" text="stout" />
           </children>
        </Pane>
-       <Pane layoutX="450.0" layoutY="255.0" prefHeight="200.0" prefWidth="1344.0" style="-fx-background-color: lightgrey;">
+       <Pane layoutX="20.0" layoutY="246.0" prefHeight="200.0" prefWidth="1344.0" style="-fx-background-color: lightgrey;">
           <children>
              <CheckBox fx:id="qua1" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" text="a few GP" />
              <CheckBox fx:id="qua2" layoutX="14.0" layoutY="37.0" mnemonicParsing="false" text="small amount of GP" />

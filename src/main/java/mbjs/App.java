@@ -18,14 +18,14 @@ public class App extends Application {
 
     @Override
     public void start(Stage stage) throws IOException {
-        var javaVersion = SystemInfo.javaVersion();
-        var javafxVersion = SystemInfo.javafxVersion();
-
-        var label = new Label("Hello, JavaFX " + javafxVersion + ", running on Java " + javaVersion + ".");
+//        var javaVersion = SystemInfo.javaVersion();
+//        var javafxVersion = SystemInfo.javafxVersion();
+//
+        var label = new Label("Hello, JavaFX , running on Java  + javaVersion + .");
         var scene = new Scene(new StackPane(label), 640, 480);
 
         Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getClassLoader().getResource("ksr2.fxml")));
-        stage.setTitle("Amazon VAT Calculator");
+        stage.setTitle("Linguistic Summary");
         stage.setScene(new Scene(root));
         stage.show();
     }

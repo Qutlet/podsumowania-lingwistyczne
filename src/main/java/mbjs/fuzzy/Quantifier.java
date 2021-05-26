@@ -6,7 +6,38 @@ import java.util.List;
 
 public class Quantifier {
 
-//    private static Quantifier quantifier = new Quantifier();
+    String name;
+    MembershipFunction membershipFunction;
+    double a;
+    double b;
+    double c;
+    double d;
+    boolean isAbsolute;
+
+    public Quantifier(String name, MembershipFunction membershipFunction, double a, double b, double c, double d, boolean isAbsolute) {
+        this.name = name;
+        this.membershipFunction = membershipFunction;
+        this.a = a;
+        this.b = b;
+        this.c = c;
+        this.d = d;
+        this.isAbsolute = isAbsolute;
+    }
+
+    public double getMembership(double x){
+        return membershipFunction.getMembership(a,b,c,d,x);
+    }
+
+    public boolean isAbsolute() {
+        return isAbsolute;
+    }
+
+    @Override
+    public String toString() {
+        return name;
+    }
+
+    //    private static Quantifier quantifier = new Quantifier();
 //    public static Quantifier getInstance(){ return quantifier;}
 //    private TrapezoidalFunction trapezoidalFunction = TrapezoidalFunction.getInstance();
 //    private TriangularFunction triangularFunction =  TriangularFunction.getInstance();
