@@ -40,6 +40,9 @@ public class Ksr2 {
     public CheckBox summ2;
 
     @FXML
+    public CheckBox summ3;
+
+    @FXML
     public CheckBox qua1;
 
     protected List<Player> playerList;// = new ArrayList<>();
@@ -69,6 +72,12 @@ public class Ksr2 {
     public void chooseSummarizers(){
         if (summ1.isSelected()){
             summarizerList.add(new Summarizer(summ1.getText(),new TrapezoidalFunction(),0,0,12,23));
+        }
+        if (summ2.isSelected()){
+            summarizerList.add(new Summarizer(summ2.getText(),new TrapezoidalFunction(),13,23,30,40));
+        }
+        if (summ3.isSelected()){
+            //summarizerList.add(new Summarizer(summ3.getText(),new TrapezoidalFunction()))
         }
 
     }
