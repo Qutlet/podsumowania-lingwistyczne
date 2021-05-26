@@ -9,12 +9,12 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.CheckBox;
 import javafx.scene.control.ListView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
-import mbjs.fuzzy.Measures;
-import mbjs.fuzzy.Summarizer;
+import mbjs.fuzzy.*;
 import mbjs.model.DataBase;
 import mbjs.model.Player;
 
@@ -33,9 +33,20 @@ public class Ksr2 {
     @FXML
     public ListView list2;
 
+    @FXML
+    public CheckBox summ1;
+
+    @FXML
+    public CheckBox summ2;
+
+    @FXML
+    public CheckBox qua1;
+
     protected List<Player> playerList;// = new ArrayList<>();
 
     protected List<Summarizer> summarizerList = new ArrayList<>();
+
+    protected List<Qualifier> qualifierList = new ArrayList<>();
 
     protected ListProperty<Player> playerListProperty = new SimpleListProperty<>();
 
@@ -56,7 +67,16 @@ public class Ksr2 {
     }
 
     public void chooseSummarizers(){
+        if (summ1.isSelected()){
+            summarizerList.add(new Summarizer(summ1.getText(),new TrapezoidalFunction(),0,0,12,23));
+        }
 
+    }
+
+    public void chooseQualifiers(){
+        if (qua1.isSelected()){
+            qualifierList.add(new Qualifier(qua1.getText(),new TrapezoidalFunction(),0,0,12,23));
+        }
     }
 
     public void saveAndClose(){
@@ -74,6 +94,18 @@ public class Ksr2 {
         System.out.println(pom.getPlayerList().size());
         //double T1 = measures.T1(playerList);
         //System.out.println(T1);
+        System.out.println(summarizerList.size());
+        System.out.println(summarizerList.get(0).getMembership(2));
+        StringBuilder summary = new StringBuilder();
+        for (Qualifier qualifier : qualifierList){
+            summary.append(qualifier.toString());
+            summary.append("basket ball players are/have ");
+            for (Summarizer summarizer: summarizerList){
+                summary.append(summarizer.toString());
+            }
+
+        }
+        System.out.println(summary.toString());
     }
 
 

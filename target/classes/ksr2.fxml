@@ -2,90 +2,148 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.CheckBox?>
-<?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ListView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
 
-<AnchorPane prefHeight="800.0" prefWidth="1340.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mbjs.Ksr2">
+<AnchorPane prefHeight="858.0" prefWidth="1799.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mbjs.Ksr2">
     <children>
-        <Button layoutX="454.0" layoutY="21.0" mnemonicParsing="false" onAction="#loadData" prefHeight="71.0" prefWidth="78.0" text="Load data" />
-      <ListView fx:id="list1" layoutX="20.0" layoutY="20.0" prefHeight="190.0" prefWidth="421.0" />
-      <Button layoutX="454.0" layoutY="113.0" mnemonicParsing="false" onAction="#chooseSummarizers" prefHeight="71.0" prefWidth="78.0" text="Summarizers" />
-      <Button layoutX="454.0" layoutY="199.0" mnemonicParsing="false" prefHeight="71.0" prefWidth="78.0" text="Qualifiers" />
-      <Button layoutX="452.0" layoutY="382.0" mnemonicParsing="false" onAction="#test" prefHeight="71.0" prefWidth="78.0" text="Generete" />
-      <Button layoutX="452.0" layoutY="290.0" mnemonicParsing="false" prefHeight="71.0" prefWidth="78.0" text="cos do podzialu" />
+        <Button layoutX="299.0" layoutY="439.0" mnemonicParsing="false" onAction="#loadData" prefHeight="71.0" prefWidth="78.0" text="Load data" />
+      <Button layoutX="211.0" layoutY="439.0" mnemonicParsing="false" onAction="#chooseSummarizers" prefHeight="71.0" prefWidth="78.0" text="Summarizers" />
+      <Button layoutX="122.0" layoutY="439.0" mnemonicParsing="false" onAction="#chooseQualifiers" prefHeight="71.0" prefWidth="78.0" text="Qualifiers" />
+      <Button layoutX="35.0" layoutY="439.0" mnemonicParsing="false" onAction="#test" prefHeight="71.0" prefWidth="78.0" text="Generete" />
       <ListView layoutX="20.0" layoutY="491.0" prefHeight="295.0" prefWidth="1300.0" />
-      <Label layoutX="20.0" layoutY="474.0" text="Summaries" />
-      <Label layoutX="20.0" layoutY="6.0" text="Database View" />
-      <ListView layoutX="20.0" layoutY="255.0" prefHeight="200.0" prefWidth="421.0" />
-      <ListView layoutX="635.0" layoutY="255.0" prefHeight="200.0" prefWidth="685.0" />
-      <Label layoutX="20.0" layoutY="237.0" text="//cos do podzialu" />
-      <Label layoutX="762.0" layoutY="237.0" text="Qaulifiers" />
-      <Label layoutX="762.0" layoutY="6.0" text="Summarizers" />
-      <Pane layoutX="541.0" layoutY="20.0" prefHeight="200.0" prefWidth="773.0" style="-fx-background-color: lightgrey;">
-         <children>
-            <CheckBox layoutX="14.0" layoutY="14.0" mnemonicParsing="false" text="a few GP" />
-            <CheckBox layoutX="14.0" layoutY="38.0" mnemonicParsing="false" text="small amount of GP" />
-            <CheckBox layoutX="14.0" layoutY="65.0" mnemonicParsing="false" text="CheckBox" />
-            <CheckBox layoutX="14.0" layoutY="92.0" mnemonicParsing="false" text="CheckBox" />
-            <CheckBox layoutX="14.0" layoutY="119.0" mnemonicParsing="false" text="CheckBox" />
-            <CheckBox layoutX="102.0" layoutY="13.0" mnemonicParsing="false" text="CheckBox" />
-            <CheckBox layoutX="102.0" layoutY="37.0" mnemonicParsing="false" text="CheckBox" />
-            <CheckBox layoutX="102.0" layoutY="64.0" mnemonicParsing="false" text="CheckBox" />
-            <CheckBox layoutX="102.0" layoutY="91.0" mnemonicParsing="false" text="CheckBox" />
-            <CheckBox layoutX="102.0" layoutY="118.0" mnemonicParsing="false" text="CheckBox" />
-            <CheckBox layoutX="196.0" layoutY="13.0" mnemonicParsing="false" text="CheckBox" />
-            <CheckBox layoutX="196.0" layoutY="37.0" mnemonicParsing="false" text="CheckBox" />
-            <CheckBox layoutX="196.0" layoutY="64.0" mnemonicParsing="false" text="CheckBox" />
-            <CheckBox layoutX="196.0" layoutY="91.0" mnemonicParsing="false" text="CheckBox" />
-            <CheckBox layoutX="196.0" layoutY="118.0" mnemonicParsing="false" text="CheckBox" />
-            <CheckBox layoutX="279.0" layoutY="13.0" mnemonicParsing="false" text="CheckBox" />
-            <CheckBox layoutX="279.0" layoutY="37.0" mnemonicParsing="false" text="CheckBox" />
-            <CheckBox layoutX="279.0" layoutY="64.0" mnemonicParsing="false" text="CheckBox" />
-            <CheckBox layoutX="279.0" layoutY="91.0" mnemonicParsing="false" text="CheckBox" />
-            <CheckBox layoutX="279.0" layoutY="118.0" mnemonicParsing="false" text="CheckBox" />
-            <CheckBox layoutX="14.0" layoutY="147.0" mnemonicParsing="false" text="CheckBox" />
-            <CheckBox layoutX="14.0" layoutY="174.0" mnemonicParsing="false" text="CheckBox" />
-            <CheckBox layoutX="102.0" layoutY="147.0" mnemonicParsing="false" text="CheckBox" />
-            <CheckBox layoutX="102.0" layoutY="174.0" mnemonicParsing="false" text="CheckBox" />
-            <CheckBox layoutX="196.0" layoutY="147.0" mnemonicParsing="false" text="CheckBox" />
-            <CheckBox layoutX="196.0" layoutY="174.0" mnemonicParsing="false" text="CheckBox" />
-            <CheckBox layoutX="279.0" layoutY="147.0" mnemonicParsing="false" text="CheckBox" />
-            <CheckBox layoutX="279.0" layoutY="174.0" mnemonicParsing="false" text="CheckBox" />
-            <CheckBox layoutX="360.0" layoutY="12.0" mnemonicParsing="false" text="CheckBox" />
-            <CheckBox layoutX="360.0" layoutY="36.0" mnemonicParsing="false" text="CheckBox" />
-            <CheckBox layoutX="360.0" layoutY="63.0" mnemonicParsing="false" text="CheckBox" />
-            <CheckBox layoutX="360.0" layoutY="90.0" mnemonicParsing="false" text="CheckBox" />
-            <CheckBox layoutX="360.0" layoutY="117.0" mnemonicParsing="false" text="CheckBox" />
-            <CheckBox layoutX="439.0" layoutY="12.0" mnemonicParsing="false" text="CheckBox" />
-            <CheckBox layoutX="439.0" layoutY="36.0" mnemonicParsing="false" text="CheckBox" />
-            <CheckBox layoutX="439.0" layoutY="63.0" mnemonicParsing="false" text="CheckBox" />
-            <CheckBox layoutX="439.0" layoutY="90.0" mnemonicParsing="false" text="CheckBox" />
-            <CheckBox layoutX="439.0" layoutY="117.0" mnemonicParsing="false" text="CheckBox" />
-            <CheckBox layoutX="533.0" layoutY="12.0" mnemonicParsing="false" text="CheckBox" />
-            <CheckBox layoutX="533.0" layoutY="36.0" mnemonicParsing="false" text="CheckBox" />
-            <CheckBox layoutX="533.0" layoutY="63.0" mnemonicParsing="false" text="CheckBox" />
-            <CheckBox layoutX="533.0" layoutY="90.0" mnemonicParsing="false" text="CheckBox" />
-            <CheckBox layoutX="533.0" layoutY="117.0" mnemonicParsing="false" text="CheckBox" />
-            <CheckBox layoutX="616.0" layoutY="12.0" mnemonicParsing="false" text="CheckBox" />
-            <CheckBox layoutX="616.0" layoutY="36.0" mnemonicParsing="false" text="CheckBox" />
-            <CheckBox layoutX="616.0" layoutY="63.0" mnemonicParsing="false" text="CheckBox" />
-            <CheckBox layoutX="616.0" layoutY="90.0" mnemonicParsing="false" text="CheckBox" />
-            <CheckBox layoutX="616.0" layoutY="117.0" mnemonicParsing="false" text="CheckBox" />
-            <CheckBox layoutX="360.0" layoutY="145.0" mnemonicParsing="false" text="CheckBox" />
-            <CheckBox layoutX="360.0" layoutY="172.0" mnemonicParsing="false" text="CheckBox" />
-            <CheckBox layoutX="439.0" layoutY="146.0" mnemonicParsing="false" text="CheckBox" />
-            <CheckBox layoutX="439.0" layoutY="173.0" mnemonicParsing="false" text="CheckBox" />
-            <CheckBox layoutX="533.0" layoutY="146.0" mnemonicParsing="false" text="CheckBox" />
-            <CheckBox layoutX="533.0" layoutY="173.0" mnemonicParsing="false" text="CheckBox" />
-            <CheckBox layoutX="616.0" layoutY="146.0" mnemonicParsing="false" text="CheckBox" />
-            <CheckBox layoutX="616.0" layoutY="173.0" mnemonicParsing="false" text="CheckBox" />
-            <CheckBox layoutX="700.0" layoutY="11.0" mnemonicParsing="false" text="CheckBox" />
-            <CheckBox layoutX="700.0" layoutY="35.0" mnemonicParsing="false" text="CheckBox" />
-         </children>
-      </Pane>
-      <ChoiceBox layoutX="139.0" layoutY="80.0" prefWidth="150.0" />
+      <Label layoutX="20.0" layoutY="474.0" prefHeight="17.0" prefWidth="1300.0" text="Summaries" />
+      <Label layoutX="450.0" layoutY="237.0" text="Qaulifiers" />
+      <Label layoutX="450.0" layoutY="6.0" text="Summarizers" />
+       <Pane layoutX="20.0" layoutY="23.0" prefHeight="200.0" prefWidth="1344.0" style="-fx-background-color: lightgrey;">
+          <children>
+             <CheckBox fx:id="summ1" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" text="a few GP" />
+             <CheckBox fx:id="summ2" layoutX="14.0" layoutY="37.0" mnemonicParsing="false" text="small amount of GP" />
+             <CheckBox fx:id="summ3" layoutX="14.0" layoutY="65.0" mnemonicParsing="false" text="average amount of GP" />
+             <CheckBox fx:id="summ4" layoutX="14.0" layoutY="92.0" mnemonicParsing="false" text="large amount of GP" />
+             <CheckBox fx:id="summ5" layoutX="14.0" layoutY="119.0" mnemonicParsing="false" text="great amount of GP" />
+             <CheckBox fx:id="summ6" layoutX="174.0" layoutY="13.0" mnemonicParsing="false" text="a few FGM" />
+             <CheckBox fx:id="summ7" layoutX="174.0" layoutY="37.0" mnemonicParsing="false" text="small amount of FGM" />
+             <CheckBox fx:id="summ8" layoutX="174.0" layoutY="64.0" mnemonicParsing="false" text="average amount of FGM" />
+             <CheckBox fx:id="summ9" layoutX="174.0" layoutY="91.0" mnemonicParsing="false" text="large amount of FGM" />
+             <CheckBox fx:id="summ10" layoutX="174.0" layoutY="118.0" mnemonicParsing="false" text="great amount of FGM" />
+             <CheckBox fx:id="summ11" layoutX="321.0" layoutY="14.0" mnemonicParsing="false" text="a few 3PM" />
+             <CheckBox fx:id="summ12" layoutX="321.0" layoutY="37.0" mnemonicParsing="false" text="small amount of 3PM" />
+             <CheckBox fx:id="summ13" layoutX="321.0" layoutY="64.0" mnemonicParsing="false" text="average amount of 3PM" />
+             <CheckBox fx:id="summ14" layoutX="321.0" layoutY="91.0" mnemonicParsing="false" text="large amount of 3PM" />
+             <CheckBox fx:id="summ15" layoutX="321.0" layoutY="118.0" mnemonicParsing="false" text="great amount of 3PM" />
+             <CheckBox fx:id="summ16" layoutX="480.0" layoutY="14.0" mnemonicParsing="false" text="a few TOV" />
+             <CheckBox fx:id="summ17" layoutX="480.0" layoutY="38.0" mnemonicParsing="false" text="small amount of TOV" />
+             <CheckBox fx:id="summ18" layoutX="480.0" layoutY="65.0" mnemonicParsing="false" text="average amount of TOV" />
+             <CheckBox fx:id="summ19" layoutX="480.0" layoutY="92.0" mnemonicParsing="false" text="large amount of TOV" />
+             <CheckBox fx:id="summ20" layoutX="480.0" layoutY="119.0" mnemonicParsing="false" text="great amount of TOV" />
+             <CheckBox fx:id="summ21" layoutX="14.0" layoutY="147.0" mnemonicParsing="false" text="a few PF" />
+             <CheckBox fx:id="summ22" layoutX="14.0" layoutY="174.0" mnemonicParsing="false" text="small amount of PF" />
+             <CheckBox fx:id="summ23" layoutX="174.0" layoutY="147.0" mnemonicParsing="false" text="average amount of PF" />
+             <CheckBox fx:id="summ24" layoutX="174.0" layoutY="174.0" mnemonicParsing="false" text="large amount of PF" />
+             <CheckBox fx:id="summ25" layoutX="321.0" layoutY="147.0" mnemonicParsing="false" text="great amount of PF" />
+             <CheckBox fx:id="summ26" layoutX="321.0" layoutY="174.0" mnemonicParsing="false" text="a few REB" />
+             <CheckBox fx:id="summ27" layoutX="480.0" layoutY="148.0" mnemonicParsing="false" text="small amount of REB" />
+             <CheckBox fx:id="summ28" layoutX="480.0" layoutY="175.0" mnemonicParsing="false" text="average amount of REB" />
+             <CheckBox fx:id="summ29" layoutX="639.0" layoutY="14.0" mnemonicParsing="false" text="great amount of REB" />
+             <CheckBox fx:id="summ30" layoutX="639.0" layoutY="38.0" mnemonicParsing="false" text="large amount of REB" />
+             <CheckBox fx:id="summ31" layoutX="639.0" layoutY="65.0" mnemonicParsing="false" text="a few AST" />
+             <CheckBox fx:id="summ32" layoutX="639.0" layoutY="92.0" mnemonicParsing="false" text="small amount of AST" />
+             <CheckBox fx:id="summ33" layoutX="639.0" layoutY="119.0" mnemonicParsing="false" text="average amount of AST" />
+             <CheckBox fx:id="summ34" layoutX="794.0" layoutY="12.0" mnemonicParsing="false" text="great amount of AST" />
+             <CheckBox fx:id="summ35" layoutX="794.0" layoutY="36.0" mnemonicParsing="false" text="large amount of AST" />
+             <CheckBox fx:id="summ36" layoutX="794.0" layoutY="63.0" mnemonicParsing="false" text="a few STL" />
+             <CheckBox fx:id="summ37" layoutX="794.0" layoutY="90.0" mnemonicParsing="false" text="small amount of STL" />
+             <CheckBox fx:id="summ38" layoutX="794.0" layoutY="117.0" mnemonicParsing="false" text="average amount of STL" />
+             <CheckBox fx:id="summ39" layoutX="938.0" layoutY="11.0" mnemonicParsing="false" text="large amount of STL" />
+             <CheckBox fx:id="summ40" layoutX="938.0" layoutY="35.0" mnemonicParsing="false" text="great amount of STL" />
+             <CheckBox fx:id="summ41" layoutX="938.0" layoutY="62.0" mnemonicParsing="false" text="a few BLK" />
+             <CheckBox fx:id="summ42" layoutX="938.0" layoutY="89.0" mnemonicParsing="false" text="small amount of BLK" />
+             <CheckBox fx:id="summ43" layoutX="938.0" layoutY="116.0" mnemonicParsing="false" text="average amount of BLK" />
+             <CheckBox fx:id="summ44" layoutX="1095.0" layoutY="12.0" mnemonicParsing="false" text="large amount of BLK" />
+             <CheckBox fx:id="summ45" layoutX="1095.0" layoutY="36.0" mnemonicParsing="false" text="great amount of BLK" />
+             <CheckBox fx:id="summ46" layoutX="1095.0" layoutY="63.0" mnemonicParsing="false" text="a few PTS" />
+             <CheckBox fx:id="summ47" layoutX="1095.0" layoutY="90.0" mnemonicParsing="false" text="small amount of PTS" />
+             <CheckBox fx:id="summ48" layoutX="1095.0" layoutY="117.0" mnemonicParsing="false" text="average amount of PTS" />
+             <CheckBox fx:id="summ49" layoutX="639.0" layoutY="147.0" mnemonicParsing="false" text="large amount of PTS" />
+             <CheckBox fx:id="summ50" layoutX="639.0" layoutY="174.0" mnemonicParsing="false" text="great amount of PTS" />
+             <CheckBox fx:id="summ51" layoutX="794.0" layoutY="146.0" mnemonicParsing="false" text="quite short" />
+             <CheckBox fx:id="summ52" layoutX="794.0" layoutY="173.0" mnemonicParsing="false" text="short" />
+             <CheckBox fx:id="summ53" layoutX="938.0" layoutY="145.0" mnemonicParsing="false" text="medium-height" />
+             <CheckBox fx:id="summ54" layoutX="938.0" layoutY="172.0" mnemonicParsing="false" text="height" />
+             <CheckBox fx:id="summ55" layoutX="1095.0" layoutY="146.0" mnemonicParsing="false" text="very height" />
+             <CheckBox fx:id="summ56" layoutX="1095.0" layoutY="173.0" mnemonicParsing="false" text="thin" />
+             <CheckBox fx:id="summ57" layoutX="1232.0" layoutY="13.0" mnemonicParsing="false" text="slim" />
+             <CheckBox fx:id="summ58" layoutX="1232.0" layoutY="35.0" mnemonicParsing="false" text="medium weight" />
+            <CheckBox fx:id="summ59" layoutX="1232.0" layoutY="63.0" mnemonicParsing="false" text="bonny" />
+            <CheckBox fx:id="summ60" layoutX="1232.0" layoutY="90.0" mnemonicParsing="false" text="stout" />
+          </children>
+       </Pane>
+       <Pane layoutX="450.0" layoutY="255.0" prefHeight="200.0" prefWidth="1344.0" style="-fx-background-color: lightgrey;">
+          <children>
+             <CheckBox fx:id="qua1" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" text="a few GP" />
+             <CheckBox fx:id="qua2" layoutX="14.0" layoutY="37.0" mnemonicParsing="false" text="small amount of GP" />
+             <CheckBox fx:id="qua3" layoutX="14.0" layoutY="65.0" mnemonicParsing="false" text="average amount of GP" />
+             <CheckBox fx:id="qua4" layoutX="14.0" layoutY="92.0" mnemonicParsing="false" text="large amount of GP" />
+             <CheckBox fx:id="qua5" layoutX="14.0" layoutY="119.0" mnemonicParsing="false" text="great amount of GP" />
+             <CheckBox fx:id="qua6" layoutX="174.0" layoutY="13.0" mnemonicParsing="false" text="a few FGM" />
+             <CheckBox fx:id="qua7" layoutX="174.0" layoutY="37.0" mnemonicParsing="false" text="small amount of FGM" />
+             <CheckBox fx:id="qua8" layoutX="174.0" layoutY="64.0" mnemonicParsing="false" text="average amount of FGM" />
+             <CheckBox fx:id="qua9" layoutX="174.0" layoutY="91.0" mnemonicParsing="false" text="large amount of FGM" />
+             <CheckBox fx:id="qua10" layoutX="174.0" layoutY="118.0" mnemonicParsing="false" text="great amount of FGM" />
+             <CheckBox fx:id="qua11" layoutX="323.0" layoutY="12.0" mnemonicParsing="false" text="a few 3PM" />
+             <CheckBox fx:id="qua12" layoutX="323.0" layoutY="36.0" mnemonicParsing="false" text="small amount of 3PM" />
+             <CheckBox fx:id="qua13" layoutX="323.0" layoutY="63.0" mnemonicParsing="false" text="average amount of 3PM" />
+             <CheckBox fx:id="qua14" layoutX="323.0" layoutY="90.0" mnemonicParsing="false" text="large amount of 3PM" />
+             <CheckBox fx:id="qua15" layoutX="323.0" layoutY="117.0" mnemonicParsing="false" text="great amount of 3PM" />
+             <CheckBox fx:id="qua16" layoutX="478.0" layoutY="12.0" mnemonicParsing="false" text="a few TOV" />
+             <CheckBox fx:id="qua17" layoutX="478.0" layoutY="36.0" mnemonicParsing="false" text="small amount of TOV" />
+             <CheckBox fx:id="qua18" layoutX="478.0" layoutY="63.0" mnemonicParsing="false" text="average amount of TOV" />
+             <CheckBox fx:id="qua19" layoutX="478.0" layoutY="90.0" mnemonicParsing="false" text="large amount of TOV" />
+             <CheckBox fx:id="qua20" layoutX="478.0" layoutY="117.0" mnemonicParsing="false" text="great amount of TOV" />
+             <CheckBox fx:id="qua21" layoutX="14.0" layoutY="147.0" mnemonicParsing="false" text="a few PF" />
+             <CheckBox fx:id="qua22" layoutX="14.0" layoutY="174.0" mnemonicParsing="false" text="small amount of PF" />
+             <CheckBox fx:id="qua23" layoutX="174.0" layoutY="147.0" mnemonicParsing="false" text="average amount of PF" />
+             <CheckBox fx:id="qua24" layoutX="174.0" layoutY="174.0" mnemonicParsing="false" text="large amount of PF" />
+             <CheckBox fx:id="qua25" layoutX="323.0" layoutY="146.0" mnemonicParsing="false" text="great amount of PF" />
+             <CheckBox fx:id="qua26" layoutX="323.0" layoutY="173.0" mnemonicParsing="false" text="a few REB" />
+             <CheckBox fx:id="qua27" layoutX="478.0" layoutY="146.0" mnemonicParsing="false" text="small amount of REB" />
+             <CheckBox fx:id="qua28" layoutX="478.0" layoutY="173.0" mnemonicParsing="false" text="average amount of REB" />
+             <CheckBox fx:id="qua29" layoutX="638.0" layoutY="12.0" mnemonicParsing="false" text="large amount of REB" />
+             <CheckBox fx:id="qua30" layoutX="638.0" layoutY="36.0" mnemonicParsing="false" text="great amount of REB" />
+             <CheckBox fx:id="qua31" layoutX="638.0" layoutY="63.0" mnemonicParsing="false" text="a few AST" />
+             <CheckBox fx:id="qua32" layoutX="638.0" layoutY="90.0" mnemonicParsing="false" text="small amount of AST" />
+             <CheckBox fx:id="qua33" layoutX="638.0" layoutY="117.0" mnemonicParsing="false" text="average amount of AST" />
+             <CheckBox fx:id="qua34" layoutX="794.0" layoutY="12.0" mnemonicParsing="false" text="large amount of AST" />
+             <CheckBox fx:id="qua35" layoutX="794.0" layoutY="36.0" mnemonicParsing="false" text="great amount of AST" />
+             <CheckBox fx:id="qua36" layoutX="794.0" layoutY="64.0" mnemonicParsing="false" text="a few STL" />
+             <CheckBox fx:id="qua37" layoutX="794.0" layoutY="90.0" mnemonicParsing="false" text="small amount of STL" />
+             <CheckBox fx:id="qua38" layoutX="794.0" layoutY="117.0" mnemonicParsing="false" text="average amount of STL" />
+             <CheckBox fx:id="qua39" layoutX="937.0" layoutY="12.0" mnemonicParsing="false" text="large amount of STL" />
+             <CheckBox fx:id="qua40" layoutX="937.0" layoutY="36.0" mnemonicParsing="false" text="great amount of STL" />
+             <CheckBox fx:id="qua41" layoutX="937.0" layoutY="63.0" mnemonicParsing="false" text="a few BLK" />
+             <CheckBox fx:id="qua42" layoutX="937.0" layoutY="90.0" mnemonicParsing="false" text="small amount of BLK" />
+             <CheckBox fx:id="qua43" layoutX="937.0" layoutY="117.0" mnemonicParsing="false" text="average amount of BLK" />
+             <CheckBox fx:id="qua44" layoutX="1092.0" layoutY="12.0" mnemonicParsing="false" text="large amount of BLK" />
+             <CheckBox fx:id="qua45" layoutX="1092.0" layoutY="36.0" mnemonicParsing="false" text="great amount of BLK" />
+             <CheckBox fx:id="qua46" layoutX="1092.0" layoutY="63.0" mnemonicParsing="false" text="a few PTS" />
+             <CheckBox fx:id="qua47" layoutX="1092.0" layoutY="90.0" mnemonicParsing="false" text="small amount of PTS" />
+             <CheckBox fx:id="qua48" layoutX="1092.0" layoutY="117.0" mnemonicParsing="false" text="average amount of PTS" />
+             <CheckBox fx:id="qua49" layoutX="638.0" layoutY="145.0" mnemonicParsing="false" text="large amount of PTS" />
+             <CheckBox fx:id="qua50" layoutX="638.0" layoutY="172.0" mnemonicParsing="false" text="great amount of PTS" />
+             <CheckBox fx:id="qua51" layoutX="794.0" layoutY="146.0" mnemonicParsing="false" text="quite short" />
+             <CheckBox fx:id="qua52" layoutX="794.0" layoutY="173.0" mnemonicParsing="false" text="short" />
+             <CheckBox fx:id="qua53" layoutX="937.0" layoutY="146.0" mnemonicParsing="false" text="medium-height" />
+             <CheckBox fx:id="qua54" layoutX="937.0" layoutY="173.0" mnemonicParsing="false" text="height" />
+             <CheckBox fx:id="qua55" layoutX="1092.0" layoutY="146.0" mnemonicParsing="false" text="very height" />
+             <CheckBox fx:id="qua56" layoutX="1092.0" layoutY="173.0" mnemonicParsing="false" text="thin" />
+             <CheckBox fx:id="qua57" layoutX="1236.0" layoutY="11.0" mnemonicParsing="false" text="slim" />
+             <CheckBox fx:id="qua58" layoutX="1236.0" layoutY="35.0" mnemonicParsing="false" text="medium weight" />
+            <CheckBox fx:id="qua59" layoutX="1236.0" layoutY="65.0" mnemonicParsing="false" text="bonny" />
+            <CheckBox fx:id="qua60" layoutX="1239.0" layoutY="92.0" mnemonicParsing="false" text="stout" />
+          </children>
+       </Pane>
     </children>
 </AnchorPane>
