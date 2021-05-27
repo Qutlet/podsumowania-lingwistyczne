@@ -18,4 +18,9 @@ public class Measures {
 //        System.out.println(players.size());
 //        return quantifier.calculateQuantifierRelative(r1 / players.size()).getA();
 //    }
+
+    public double T1(){
+        return 0.0;
+    }
+
 }

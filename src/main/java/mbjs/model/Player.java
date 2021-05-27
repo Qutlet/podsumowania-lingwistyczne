@@ -188,4 +188,9 @@ public class Player {
                 ", weight=" + weight +
                 '}';
     }
+
+
+    public double getPlayerStat(String statName){
+        return 0.0;
+    }
 }
