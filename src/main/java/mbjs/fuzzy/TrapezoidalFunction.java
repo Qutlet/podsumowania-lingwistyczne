@@ -21,4 +21,14 @@ public class TrapezoidalFunction implements MembershipFunction {
         }
         else return 0.0; // x >= d
     }
+
+    @Override
+    public double cardinality(double a, double b, double c, double d) {
+        return ((d-a) + (c - b)) / 2;
+    }
+
+    @Override
+    public double support(double a, double b, double c, double d) {
+        return d - a;
+    }
 }

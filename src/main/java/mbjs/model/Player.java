@@ -191,6 +191,81 @@ public class Player {
 
 
     public double getPlayerStat(String statName){
+        switch (statName) {
+            case "a few GP":
+            case "small amount of GP":
+            case "average amount of GP":
+            case "large amount of GP":
+            case "great amount of GP":
+                return GP;
+            case "a few FGM":
+            case "small amount of FGM":
+            case "average amount of FGM":
+            case "large amount of FGM":
+            case "great amount of FGM":
+                return FGM;
+            case "a few 3PM":
+            case "small amount of 3PM":
+            case "average amount of 3PM":
+            case "large amount of 3PM":
+            case "great amount of 3PM":
+                return ThreePM;
+            case "a few TOV":
+            case "small amount of TOV":
+            case "average amount of TOV":
+            case "large amount of TOV":
+            case "great amount of TOV":
+                return TOV;
+            case "a few PF":
+            case "small amount of PF":
+            case "average amount of PF":
+            case "large amount of PF":
+            case "great amount of PF":
+                return PF;
+            case "a few REB":
+            case "small amount of REB":
+            case "average amount of REB":
+            case "large amount of REB":
+            case "great amount of REB":
+                return REB;
+            case "a few AST":
+            case "small amount of AST":
+            case "average amount of AST":
+            case "large amount of AST":
+            case "great amount of AST":
+                return AST;
+            case "a few STL":
+            case "small amount of STL":
+            case "average amount of STL":
+            case "large amount of STL":
+            case "great amount of STL":
+                return STL;
+            case "a few BLK":
+            case "small amount of BLK":
+            case "average amount of BLK":
+            case "large amount of BLK":
+            case "great amount of BLK":
+                return BLK;
+            case "a few PTS":
+            case "small amount of PTS":
+            case "average amount of PTS":
+            case "large amount of PTS":
+            case "great amount of PTS":
+                return PTS;
+            case "quite short":
+            case "short":
+            case "medium-height":
+            case "height":
+            case "very height":
+                return height;
+            case "thin":
+            case "slim":
+            case "medium weight":
+            case "bonny":
+            case "stout":
+                return weight;
+
+        }
         return 0.0;
     }
 }

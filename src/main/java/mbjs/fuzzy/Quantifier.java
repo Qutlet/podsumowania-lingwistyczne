@@ -13,6 +13,8 @@ public class Quantifier {
     double c;
     double d;
     boolean isAbsolute;
+    double cardinality;
+    double support;
 
     public Quantifier(String name, MembershipFunction membershipFunction, double a, double b, double c, double d, boolean isAbsolute) {
         this.name = name;
@@ -22,6 +24,8 @@ public class Quantifier {
         this.c = c;
         this.d = d;
         this.isAbsolute = isAbsolute;
+        this.cardinality = membershipFunction.cardinality(a,b,c,d);
+        this.support = membershipFunction.support(a,b,c,d);
     }
 
     public double getMembership(double x){

@@ -22,4 +22,14 @@ public class GaussianFunction implements MembershipFunction{
     public double getMembership(double a, double b, double c, double d, double x) {
         return Math.exp(-0.5* Math.pow((x - mX(a,b))/a(a,b),2));
     }
+
+    @Override
+    public double cardinality(double a, double b, double c, double d) {
+        return 0;
+    }
+
+    @Override
+    public double support(double a, double b, double c, double d) {
+        return 0;
+    }
 }

@@ -7,10 +7,7 @@ import java.util.List;
 
 public class pom {
 
-    private static pom pom = new pom();
-    public static pom getInstance(){
-        return pom;
-    }
+
 
     private List<Player> playerList = new ArrayList<>();
     //private List<>

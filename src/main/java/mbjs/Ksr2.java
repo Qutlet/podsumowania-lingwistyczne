@@ -704,11 +704,11 @@ public class Ksr2 {
                 }
             }
         }
+        for (LinguisticSummary summary : linguisticSummaryList){
+            summary.calculateMeasures(linguisticSummaryList,playerList);
+        }
         linguisticSummaryListProperty.set(FXCollections.observableArrayList(linguisticSummaryList));
         summList.itemsProperty().bind(linguisticSummaryListProperty);
-        for (LinguisticSummary summary : linguisticSummaryList){
-            System.out.println(summary.T1(playerList));
-        }
     }
 
     public void test(){

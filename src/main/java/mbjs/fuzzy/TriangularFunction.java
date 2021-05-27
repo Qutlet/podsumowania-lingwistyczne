@@ -37,4 +37,14 @@ public class TriangularFunction implements MembershipFunction {
         }
         else return 0.0; // x >= c
     }
+
+    @Override
+    public double cardinality(double a, double b, double c, double d) {
+        return (c - a) / 2;
+    }
+
+    @Override
+    public double support(double a, double b, double c, double d) {
+        return c - a;
+    }
 }

@@ -8,6 +8,7 @@ public class Summarizer {
     double b;
     double c;
     double d;
+    double cardinality;
 
     public Summarizer(String name, MembershipFunction membershipFunction, double a, double b, double c, double d) {
         this.name = name;
@@ -16,6 +17,7 @@ public class Summarizer {
         this.b = b;
         this.c = c;
         this.d = d;
+        this.cardinality = membershipFunction.cardinality(a,b,c,d);
     }
 
     public double getMembership(double x){
