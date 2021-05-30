@@ -30,23 +30,19 @@ public class LinguisticSummary {
     public String toString() {
         DecimalFormat df = new DecimalFormat("###.##");
         if (qualifier == null){
-            StringBuilder summary = new StringBuilder(quantifier + "basketball players are/have " + summarizer + " [");
-//            for (Double measure : measures){
+            //            for (Double measure : measures){
 //                summary.append(df.format(measure));
 //                summary.append(";");
 //            }
-            summary.append(measures);
-            summary.append("]");
-            return summary.toString();
+            return quantifier + "basketball players are/have " + summarizer + " [" + measures +
+                    "]";
         }else {
-            StringBuilder summary = new StringBuilder(quantifier + "basketball players who are/have " + qualifier + " are/have " + summarizer + " [");
-//            for (Double measure : measures){
+            //            for (Double measure : measures){
 //                summary.append(df.format(measure));
 //                summary.append(";");
 //            }
-            summary.append(measures);
-            summary.append("]");
-            return summary.toString();
+            return quantifier + "basketball players who are/have " + qualifier + " are/have " + summarizer + " [" + measures +
+                    "]";
         }
     }
 
@@ -180,7 +176,7 @@ public class LinguisticSummary {
         }
     }
 
-    public double T4(List<Player> players, List<LinguisticSummary> linguisticSummaries){ //o panie to ty na mnie spojrzales
+    public double T4(List<Player> players, List<LinguisticSummary> linguisticSummaries){
         double pom = 1.0;
             double pom2 = 0.0;
             for (Player player : players){
@@ -195,13 +191,12 @@ public class LinguisticSummary {
     }
 
     public double T5(List<LinguisticSummary> linguisticSummaries){
-        List<LinguisticSummary> linguisticSummaryList = new ArrayList<>();
-        for (LinguisticSummary linguisticSummary : linguisticSummaries){
-            if (linguisticSummary.summarizer.name.equals(this.summarizer.name)){
-                linguisticSummaryList.add(linguisticSummary);
-            }
+        if (summarizer instanceof ComplexSummarizer){
+            return 2 * Math.pow(0.5,2);
+
+        } else {
+            return 2 * Math.pow(0.5,1);
         }
-        return 2 * Math.pow(0.5,linguisticSummaryList.size());
     }
 
     public double T6(List<Player> players){
@@ -221,66 +216,44 @@ public class LinguisticSummary {
     }
 
     public double T8(List<Player> players, List<LinguisticSummary> linguisticSummaries){
-        List<LinguisticSummary> linguisticSummaryList = new ArrayList<>();
-        for (LinguisticSummary linguisticSummary : linguisticSummaries){
-            if (linguisticSummary.summarizer.name.equals(this.summarizer.name)){
-                linguisticSummaryList.add(linguisticSummary);
-            }
-        }
         double pom = 1.0;
-        for (LinguisticSummary linguisticSummary : linguisticSummaryList){
-            pom *= linguisticSummary.summarizer.cardinality / players.size();
+        if (summarizer instanceof ComplexSummarizer){
+            pom *= ((ComplexSummarizer) summarizer).getCardinality() / players.size();
+            System.out.println("KURWA " + pom + " Kurwa" + (1.0 - Math.pow(pom,1.0/2)));
+            return 1.0 - Math.pow(pom,1.0/2);
+        } else {
+            pom *= summarizer.cardinality / players.size();
+            return 1.0 - Math.pow(pom,1.0/1);
         }
-        return 1.0 - Math.pow(pom,1.0/linguisticSummaryList.size());
     }
 
     public double T9(List<Player> players, List<LinguisticSummary> linguisticSummaries){
-//        if (qualifier == null){
-//            return 0.0;
-//        }
-//        List<LinguisticSummary> linguisticSummaryList = new ArrayList<>();
-//        for (LinguisticSummary linguisticSummary : linguisticSummaries){
-//            if (linguisticSummary.qualifier.name.equals(this.qualifier.name)){
-//                linguisticSummaryList.add(linguisticSummary);
-//            }
-//        }
-//        double pom = 1.0;
-//        for (LinguisticSummary linguisticSummary : linguisticSummaryList){
-//            pom *= linguisticSummary.getFuzziness3(players);
-//        }
-//        return 1.0 - Math.pow(pom,1.0/linguisticSummaryList.size());
+        if (qualifier == null){
+            return 0.0;
+        }
         return 1.0 - qualifier.getFuzziness(players);
     }
 
     public double T10(List<Player> players) {
-//        if (qualifier == null){
-//            return 0.0;
-//        }
-//        List<LinguisticSummary> linguisticSummaryList = new ArrayList<>();
-//        for (LinguisticSummary linguisticSummary : linguisticSummaries){
-//            if (linguisticSummary.qualifier.name.equals(this.qualifier.name)){
-//                linguisticSummaryList.add(linguisticSummary);
-//            }
-//        }
-//        double pom = 1.0;
-//        for (LinguisticSummary linguisticSummary : linguisticSummaryList){
-//            pom *= linguisticSummary.qualifier.cardinality;
-//        }
-//        return 1.0 - Math.pow(pom,1.0/linguisticSummaryList.size());
-        return 1.0 - qualifier.cardinality / players.size();
+        if (qualifier == null){
+            return 0.0;
+        }
+        if (qualifier instanceof ComplexQualifier){
+            return 1.0 - ((ComplexQualifier) qualifier).getCardinality() / players.size();
+        } else {
+            return 1.0 - qualifier.cardinality / players.size();
+        }
     }
 
     public double T11(List<LinguisticSummary> linguisticSummaries){
         if (qualifier == null){
             return 0.0;
         }
-        List<LinguisticSummary> linguisticSummaryList = new ArrayList<>();
-        for (LinguisticSummary linguisticSummary : linguisticSummaries){
-            if (linguisticSummary.qualifier.name.equals(this.qualifier.name)){
-                linguisticSummaryList.add(linguisticSummary);
-            }
+        if (qualifier instanceof ComplexQualifier){
+            return 2 * Math.pow(0.5,2);
+        } else {
+            return 2 * Math.pow(0.5,1);
         }
-        return 2 * Math.pow(0.5,linguisticSummaryList.size());
     }
 
 

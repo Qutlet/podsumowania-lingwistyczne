@@ -6,6 +6,7 @@ import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ListView;
+import javafx.scene.control.TextField;
 import mbjs.fuzzy.*;
 import mbjs.model.DataBase;
 import mbjs.model.Player;
@@ -23,6 +24,9 @@ public class Ksr2 {
 
     @FXML
     public ListView<LinguisticSummary> summList;
+
+    @FXML
+    public TextField a;
 
     @FXML
     public CheckBox summ1;
@@ -684,8 +688,60 @@ public class Ksr2 {
         quantifierList.add(new Quantifier("All ",new TrapezoidalFunction(),0.85,0.9,1,1,false));
     }
 
-    public void generate(){
+    public void generateWithAdd(){
+        clearAll();
+        chooseQualifiers();
+        chooseSummarizers();
+        loadData();
+        if (qualifierList.isEmpty()){
+            for (Quantifier quantifier : quantifierList) {
+                    linguisticSummaryList.add(new LinguisticSummary(quantifier,new ComplexSummarizer(summarizerList.get(0),summarizerList.get(1),false)));
+            }
+        } else {
+            for (Quantifier quantifier : quantifierList) {
+                linguisticSummaryList.add(new LinguisticSummary(quantifier,new ComplexQualifier(qualifierList.get(0),qualifierList.get(1),false),new ComplexSummarizer(summarizerList.get(0),summarizerList.get(1),false)));
+            }
+        }
+        for (LinguisticSummary summary : linguisticSummaryList){
+            summary.calculateMeasures(linguisticSummaryList,playerList);
+        }
+        linguisticSummaryListProperty.set(FXCollections.observableArrayList(linguisticSummaryList));
+        summList.itemsProperty().bind(linguisticSummaryListProperty);
+    }
 
+    public void generateWithOr(){
+        clearAll();
+        chooseQualifiers();
+        chooseSummarizers();
+        loadData();
+        if (qualifierList.isEmpty()){
+            for (Quantifier quantifier : quantifierList) {
+                linguisticSummaryList.add(new LinguisticSummary(quantifier,new ComplexSummarizer(summarizerList.get(0),summarizerList.get(1),true)));
+            }
+        } else {
+            for (Quantifier quantifier : quantifierList) {
+                linguisticSummaryList.add(new LinguisticSummary(quantifier,new ComplexQualifier(qualifierList.get(0),qualifierList.get(1),true),new ComplexSummarizer(summarizerList.get(0),summarizerList.get(1),true)));
+            }
+        }
+        for (LinguisticSummary summary : linguisticSummaryList){
+            summary.calculateMeasures(linguisticSummaryList,playerList);
+        }
+        linguisticSummaryListProperty.set(FXCollections.observableArrayList(linguisticSummaryList));
+        summList.itemsProperty().bind(linguisticSummaryListProperty);
+    }
+
+    public void clearAll(){
+        playerList.clear();
+        qualifierList.clear();
+        quantifierList.clear();
+        summarizerList.clear();
+    }
+
+    public void generate(){
+        clearAll();
+        chooseQualifiers();
+        chooseSummarizers();
+        loadData();
         if (qualifierList.isEmpty()){
             for (Quantifier quantifier : quantifierList) {
                 for (Summarizer summarizer : summarizerList){

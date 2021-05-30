@@ -159,5 +159,7 @@
       <Label layoutX="1121.0" layoutY="474.0" text="Name" />
       <Button fx:id="newSumm" layoutX="1121.0" layoutY="601.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="214.0" text="Add summarizer" />
       <Button fx:id="newQuali" layoutX="1121.0" layoutY="569.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="214.0" text="Add qualifier" />
+      <Button layoutX="457.0" layoutY="446.0" mnemonicParsing="false" onAction="#generateWithAdd" prefHeight="46.0" prefWidth="52.0" text="And" />
+      <Button layoutX="523.0" layoutY="446.0" mnemonicParsing="false" onAction="#generateWithOr" prefHeight="46.0" prefWidth="55.0" text="Or" />
     </children>
 </AnchorPane>

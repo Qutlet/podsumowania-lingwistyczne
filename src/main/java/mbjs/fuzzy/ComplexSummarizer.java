@@ -17,6 +17,12 @@ public class ComplexSummarizer extends Summarizer implements FuzzySet{
         this.or = or;
     }
 
+    public ComplexSummarizer(Summarizer summarizer1, Summarizer summarizer2, boolean or) {
+        this.summarizer1 = summarizer1;
+        this.summarizer2 = summarizer2;
+        this.or = or;
+    }
+
     @Override
     public String toString() {
         if (or){
@@ -48,6 +54,10 @@ public class ComplexSummarizer extends Summarizer implements FuzzySet{
             return s1;
         }
 
+    }
+
+    public double getCardinality(){
+            return summarizer1.cardinality*summarizer2.cardinality;
     }
 
     @Override

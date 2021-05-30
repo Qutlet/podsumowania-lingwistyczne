@@ -25,6 +25,9 @@ public class Summarizer implements FuzzySet {
         this.cardinality = membershipFunction.cardinality(a,b,c,d);
     }
 
+    public Summarizer() {
+    }
+
     @Override
     public String toString() {
         return name;

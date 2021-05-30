@@ -25,6 +25,9 @@ public class Qualifier implements FuzzySet {
         this.cardinality = membershipFunction.cardinality(a,b,c,d);
     }
 
+    public Qualifier() {
+    }
+
     @Override
     public String toString() {
         return name;

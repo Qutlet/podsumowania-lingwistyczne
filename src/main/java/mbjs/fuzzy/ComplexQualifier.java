@@ -20,6 +20,12 @@ public class ComplexQualifier extends Qualifier implements FuzzySet {
         this.or = or;
     }
 
+    public ComplexQualifier(Qualifier qualifier1, Qualifier qualifier2, boolean or) {
+        this.qualifier1 = qualifier1;
+        this.qualifier2 = qualifier2;
+        this.or = or;
+    }
+
     @Override
     public String toString() {
         if (or){
@@ -51,6 +57,10 @@ public class ComplexQualifier extends Qualifier implements FuzzySet {
             return s1;
         }
 
+    }
+
+    public double getCardinality(){
+        return qualifier1.cardinality*qualifier2.cardinality;
     }
 
     @Override
