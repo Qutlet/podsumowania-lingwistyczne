@@ -17,16 +17,22 @@ import java.util.List;
 public class Ksr2 {
 
     @FXML
-    public ListView<Player> list1;
-
-    @FXML
-    public ListView list2;
-
-    @FXML
     public ListView<LinguisticSummary> summList;
 
     @FXML
-    public TextField a;
+    public TextField newA;
+
+    @FXML
+    public TextField newB;
+
+    @FXML
+    public TextField newC;
+
+    @FXML
+    public TextField newD;
+
+    @FXML
+    public TextField newName;
 
     @FXML
     public CheckBox summ1;
@@ -289,8 +295,6 @@ public class Ksr2 {
         DataBase dataBase = DataBase.getSelf();
         playerList = dataBase.addPlayers();
         chooseQuantifier();
-//        playerListProperty.set(FXCollections.observableArrayList(playerList));
-//        list1.itemsProperty().bind(playerListProperty);
     }
 
     public void chooseSummarizers(){
@@ -765,6 +769,18 @@ public class Ksr2 {
         linguisticSummaryListProperty.set(FXCollections.observableArrayList(linguisticSummaryList));
         summList.itemsProperty().bind(linguisticSummaryListProperty);
     }
+
+    public void addNewSummarizer(){
+        if (newD.getText().equals("") && newC.getText().equals("")){
+            summarizerList.add(new Summarizer(newName.getText(),new GaussianFunction(),Double.parseDouble(newA.getText()),Double.parseDouble(newB.getText()),-1,-1));
+        } else if (newD.getText().equals("")){
+            summarizerList.add(new Summarizer(newName.getText(),new TriangularFunction(),Double.parseDouble(newA.getText()),Double.parseDouble(newB.getText()),Double.parseDouble(newC.getText()),-1));
+        } else {
+            summarizerList.add(new Summarizer(newName.getText(),new TrapezoidalFunction(),Double.parseDouble(newA.getText()),Double.parseDouble(newB.getText()),Double.parseDouble(newC.getText()),Double.parseDouble(newD.getText())));
+        }
+    }
+
+    //public void addNewQuantifier
 
     public void test(){
         System.out.println("Hello World! test streamline object");
