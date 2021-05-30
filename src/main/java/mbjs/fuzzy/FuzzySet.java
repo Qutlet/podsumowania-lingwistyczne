@@ -1,4 +1,14 @@
 package mbjs.fuzzy;
 
-public class FuzzySet {
+import mbjs.model.Player;
+
+import java.util.List;
+
+public interface FuzzySet {
+
+    double getMembership(double x);
+
+    List<Player> support(List<Player> players);
+
+    double getFuzziness(List<Player> players);
 }

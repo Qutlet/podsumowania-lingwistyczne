@@ -11,7 +11,7 @@ public class LinguisticSummary {
     Quantifier quantifier;
     Summarizer summarizer;
     Qualifier qualifier;
-    List<Double> measures;
+    Double measures;
 
     public LinguisticSummary(Quantifier quantifier, Qualifier qualifier, Summarizer summarizer) {
         this.quantifier = quantifier;
@@ -31,118 +31,147 @@ public class LinguisticSummary {
         DecimalFormat df = new DecimalFormat("###.##");
         if (qualifier == null){
             StringBuilder summary = new StringBuilder(quantifier + "basketball players are/have " + summarizer + " [");
-            for (Double measure : measures){
-                summary.append(df.format(measure));
-                summary.append(";");
-            }
+//            for (Double measure : measures){
+//                summary.append(df.format(measure));
+//                summary.append(";");
+//            }
+            summary.append(measures);
             summary.append("]");
             return summary.toString();
         }else {
             StringBuilder summary = new StringBuilder(quantifier + "basketball players who are/have " + qualifier + " are/have " + summarizer + " [");
-            for (Double measure : measures){
-                summary.append(df.format(measure));
-                summary.append(";");
-            }
+//            for (Double measure : measures){
+//                summary.append(df.format(measure));
+//                summary.append(";");
+//            }
+            summary.append(measures);
             summary.append("]");
             return summary.toString();
         }
-    }
-
-    public String summaryP1F1(){
-        return quantifier + "basketball players are/have " + summarizer;
-    }
-
-    public String summaryP1F2(){
-        return quantifier + "basketball players who are/have " + qualifier + " are/have " + summarizer;
-    }
-
-    public List<Player> support(List<Player> players){
-        List<Player> support = new ArrayList<>();
-        for (Player player : players) {
-            if (summarizer.getMembership(player.getPlayerStat(summarizer.name)) > 0) {
-                support.add(player);
-            }
-        }
-        return support;
-    }
-
-    public List<Player> support3(List<Player> players){
-        List<Player> support = new ArrayList<>();
-        for (Player player : players) {
-            if (qualifier.getMembership(player.getPlayerStat(qualifier.name)) > 0) {
-                support.add(player);
-            }
-        }
-        return support;
-    }
-
-    public double getFuzziness(List<Player> players){
-        return ((double) support(players).size()) / ((double) players.size());
-    }
-
-    public double getFuzziness3(List<Player> players){
-        return ((double) support3(players).size()) / ((double) players.size());
     }
 
     public double T1(List<Player> players){
         double sum =0.0;
         double pom = 0.0;
         double sumB = 0.0;
-        if (qualifier == null){
-            if (quantifier.isAbsolute()) {
-                for(Player player : players){
-                    sum += summarizer.getMembership(player.getPlayerStat(summarizer.name));
+        if (summarizer instanceof ComplexSummarizer){
+            if (qualifier == null){
+                if (quantifier.isAbsolute()) {
+                    for(Player player : players){
+                        sum += ((ComplexSummarizer) summarizer).getMembership(player.getPlayerStat(((ComplexSummarizer) summarizer).summarizer1.name),player.getPlayerStat(((ComplexSummarizer) summarizer).summarizer2.name));
+                    }
+                    pom = quantifier.getMembership(sum);
                 }
-                pom = quantifier.getMembership(sum);
-            }
-            if (!quantifier.isAbsolute()){
-                for(Player player : players){
-                    sum += summarizer.getMembership(player.getPlayerStat(summarizer.name));
+                if (!quantifier.isAbsolute()){
+                    for(Player player : players){
+                        sum += ((ComplexSummarizer) summarizer).getMembership(player.getPlayerStat(((ComplexSummarizer) summarizer).summarizer1.name),player.getPlayerStat(((ComplexSummarizer) summarizer).summarizer2.name));
+                    }
+                    pom = quantifier.getMembership(sum / players.size());
                 }
-                pom = quantifier.getMembership(sum / players.size());
+            }else {
+                if (qualifier instanceof ComplexQualifier){
+                    for(Player player : players){
+                        //sum += Math.min(qualifier.getMembership(player.getPlayerStat(qualifier.name)),summarizer.getMembership(player.getPlayerStat(summarizer.name)));
+                        sum += Math.min(((ComplexQualifier) qualifier).getMembership(player.getPlayerStat(((ComplexQualifier) qualifier).qualifier1.name),player.getPlayerStat(((ComplexQualifier) qualifier).qualifier2.name)),((ComplexSummarizer) summarizer).getMembership(player.getPlayerStat(((ComplexSummarizer) summarizer).summarizer1.name),player.getPlayerStat(((ComplexSummarizer) summarizer).summarizer2.name)));
+                        sumB += ((ComplexQualifier) qualifier).getMembership(player.getPlayerStat(((ComplexQualifier) qualifier).qualifier1.name),player.getPlayerStat(((ComplexQualifier) qualifier).qualifier2.name));
+                    }
+                } else {
+                    for(Player player : players){
+                        sum += Math.min(qualifier.getMembership(player.getPlayerStat(qualifier.name)),summarizer.getMembership(player.getPlayerStat(summarizer.name)));
+                        sumB += qualifier.getMembership(player.getPlayerStat(summarizer.name));
+                    }
+                }
+                pom = quantifier.getMembership(sum / sumB);
             }
-        } else {
+        }else if (qualifier instanceof ComplexQualifier) {
             for(Player player : players){
-                sum += Math.min(qualifier.getMembership(player.getPlayerStat(qualifier.name)),summarizer.getMembership(player.getPlayerStat(summarizer.name)));
-                sumB += qualifier.getMembership(player.getPlayerStat(summarizer.name));
+                sum += Math.min(((ComplexQualifier) qualifier).getMembership(player.getPlayerStat(((ComplexQualifier) qualifier).qualifier1.name),player.getPlayerStat(((ComplexQualifier) qualifier).qualifier2.name)),summarizer.getMembership(player.getPlayerStat(summarizer.name)));
+                sumB += ((ComplexQualifier) qualifier).getMembership(player.getPlayerStat(((ComplexQualifier) qualifier).qualifier1.name),player.getPlayerStat(((ComplexQualifier) qualifier).qualifier2.name));
             }
             pom = quantifier.getMembership(sum / sumB);
+        } else {
+            if (qualifier == null){
+                if (quantifier.isAbsolute()) {
+                    for(Player player : players){
+                        sum += summarizer.getMembership(player.getPlayerStat(summarizer.name));
+                    }
+                    pom = quantifier.getMembership(sum);
+                }
+                if (!quantifier.isAbsolute()){
+                    for(Player player : players){
+                        sum += summarizer.getMembership(player.getPlayerStat(summarizer.name));
+                    }
+                    pom = quantifier.getMembership(sum / players.size());
+                }
+            } else {
+                for(Player player : players){
+                    sum += Math.min(qualifier.getMembership(player.getPlayerStat(qualifier.name)),summarizer.getMembership(player.getPlayerStat(summarizer.name)));
+                    sumB += qualifier.getMembership(player.getPlayerStat(summarizer.name));
+                }
+                pom = quantifier.getMembership(sum / sumB);
+            }
         }
         return pom;
     }
 
     public double T2(List<Player> players, List<LinguisticSummary> linguisticSummaries){ //co to za bydle
         double pom =1.0;
-        List<LinguisticSummary> linguisticSummaryList = new ArrayList<>();
-        for (LinguisticSummary linguisticSummary : linguisticSummaries){
-            if (linguisticSummary.summarizer.name.equals(this.summarizer.name)){
-                linguisticSummaryList.add(linguisticSummary);
-            }
+//        List<LinguisticSummary> linguisticSummaryList = new ArrayList<>();
+//        for (LinguisticSummary linguisticSummary : linguisticSummaries){
+//            if (linguisticSummary.summarizer.name.equals(this.summarizer.name)){
+//                linguisticSummaryList.add(linguisticSummary);
+//            }
+//        }
+//        for (LinguisticSummary linguisticSummary : linguisticSummaryList){
+//            pom *= linguisticSummary.summarizer.getFuzziness(players);
+//        }
+        pom *= summarizer.getFuzziness(players);
+        if (summarizer instanceof ComplexSummarizer){
+            return 1 - Math.pow(pom,1.0 / 2.0);
         }
-        for (LinguisticSummary linguisticSummary : linguisticSummaryList){
-            pom *= linguisticSummary.getFuzziness(players);
-        }
-        return 1 - Math.pow(pom,1.0 / linguisticSummaryList.size());
+        return 1 - Math.pow(pom,1.0 / 1.0);
     }
 
     public double T3(List<Player> players){
         double s = 0.0;
         double q = 0.0;
         for (Player player : players){
-            if (qualifier == null){
-                if (summarizer.getMembership(player.getPlayerStat(summarizer.name)) > 0){
-                    s++;
+            if (summarizer instanceof ComplexSummarizer){
+                if (qualifier == null){
+                    if (((ComplexSummarizer) summarizer).getMembership(player.getPlayerStat(((ComplexSummarizer) summarizer).summarizer1.name),player.getPlayerStat(((ComplexSummarizer) summarizer).summarizer2.name)) > 0){
+                        s++;
+                    }
+                } else {
+                    if (((ComplexQualifier) qualifier).getMembership(player.getPlayerStat(((ComplexQualifier) qualifier).qualifier1.name),player.getPlayerStat(((ComplexQualifier) qualifier).qualifier2.name)) > 0){
+                        q++;
+                        if (((ComplexSummarizer) summarizer).getMembership(player.getPlayerStat(((ComplexSummarizer) summarizer).summarizer1.name),player.getPlayerStat(((ComplexSummarizer) summarizer).summarizer2.name)) > 0) {
+                            s++;
+                        }
+                    }
                 }
-            }
-            else {
-                if (qualifier.getMembership(player.getPlayerStat(qualifier.name)) > 0){
+
+            } else if (qualifier instanceof ComplexQualifier){
+                if (((ComplexQualifier) qualifier).getMembership(player.getPlayerStat(((ComplexQualifier) qualifier).qualifier1.name),player.getPlayerStat(((ComplexQualifier) qualifier).qualifier2.name)) > 0){
                     q++;
                     if (summarizer.getMembership(player.getPlayerStat(summarizer.name)) > 0) {
                         s++;
                     }
                 }
+            }else {
+                if (qualifier == null){
+                    if (summarizer.getMembership(player.getPlayerStat(summarizer.name)) > 0){
+                        s++;
+                    }
+                }
+                else {
+                    if (qualifier.getMembership(player.getPlayerStat(qualifier.name)) > 0){
+                        q++;
+                        if (summarizer.getMembership(player.getPlayerStat(summarizer.name)) > 0) {
+                            s++;
+                        }
+                    }
+                }
             }
-
         }
         if (qualifier == null){
             return s/ players.size();
@@ -153,21 +182,15 @@ public class LinguisticSummary {
 
     public double T4(List<Player> players, List<LinguisticSummary> linguisticSummaries){ //o panie to ty na mnie spojrzales
         double pom = 1.0;
-        List<LinguisticSummary> linguisticSummaryList = new ArrayList<>();
-        for (LinguisticSummary linguisticSummary : linguisticSummaries){
-            if (linguisticSummary.summarizer.name.equals(this.summarizer.name)){
-                linguisticSummaryList.add(linguisticSummary);
-            }
-        }
-        //System.out.println(linguisticSummaryList.size()); 18 moze byc chyba
-        for (LinguisticSummary linguisticSummary : linguisticSummaryList){
             double pom2 = 0.0;
             for (Player player : players){
-                pom2 += linguisticSummary.summarizer.getMembership(player.getPlayerStat(summarizer.name));
+                if (summarizer instanceof ComplexSummarizer){
+                    pom2 += ((ComplexSummarizer) summarizer).getMembership(player.getPlayerStat(((ComplexSummarizer) summarizer).summarizer1.name),player.getPlayerStat(((ComplexSummarizer) summarizer).summarizer2.name));
+                } else {
+                    pom2 += summarizer.getMembership(player.getPlayerStat(summarizer.name));
+                }
             }
-            pom *= pom2 / players.size(); //players size to 14500 aaaaaaaaa ty jak dzielimy cos przez 14500 to pewnie jest jakies 0.0000000000000003 zaokraglone daje 0.0
-        }
-        System.out.println(Math.abs(pom));
+            pom *= pom2 / players.size();
         return Math.abs(pom - T3(players));
     }
 
@@ -226,7 +249,7 @@ public class LinguisticSummary {
 //            pom *= linguisticSummary.getFuzziness3(players);
 //        }
 //        return 1.0 - Math.pow(pom,1.0/linguisticSummaryList.size());
-        return 1.0 - getFuzziness3(players);
+        return 1.0 - qualifier.getFuzziness(players);
     }
 
     public double T10(List<Player> players) {
@@ -274,7 +297,12 @@ public class LinguisticSummary {
         measures.add(T9(players,linguisticSummaries));
         measures.add(T10(players));
         measures.add(T11(linguisticSummaries));
-        this.measures = measures;
+        measures.forEach(System.out::println);
+        double pom = 0.0;
+        for (Double me : measures){
+            pom += ((1.0 / 11)*me);
+        }
+        this.measures = pom;
     }
 
 }
