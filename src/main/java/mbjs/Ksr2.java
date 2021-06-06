@@ -5,19 +5,24 @@ import javafx.beans.property.SimpleListProperty;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.scene.control.CheckBox;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import mbjs.fuzzy.*;
 import mbjs.model.DataBase;
 import mbjs.model.Player;
 
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 public class Ksr2 {
 
     @FXML
-    public ListView<LinguisticSummary> summList;
+    public ListView summList;
 
     @FXML
     public TextField newA;
@@ -33,6 +38,9 @@ public class Ksr2 {
 
     @FXML
     public TextField newName;
+
+    @FXML
+    public CheckBox newAbsolute;
 
     @FXML
     public CheckBox summ1;
@@ -294,6 +302,7 @@ public class Ksr2 {
     public void loadData(){
         DataBase dataBase = DataBase.getSelf();
         playerList = dataBase.addPlayers();
+        //test();
         chooseQuantifier();
     }
 
@@ -692,46 +701,58 @@ public class Ksr2 {
         quantifierList.add(new Quantifier("All ",new TrapezoidalFunction(),0.85,0.9,1,1,false));
     }
 
-    public void generateWithAdd(){
+    public void generateWithAdd() throws IOException {
         clearAll();
         chooseQualifiers();
         chooseSummarizers();
         loadData();
+        ComplexSummarizer complexSummarizer = new ComplexSummarizer(false);
+        complexSummarizer.addAll(summarizerList);
+        ComplexQualifier complexQualifier= new ComplexQualifier(false);
+        complexQualifier.addAll(qualifierList);
         if (qualifierList.isEmpty()){
             for (Quantifier quantifier : quantifierList) {
-                    linguisticSummaryList.add(new LinguisticSummary(quantifier,new ComplexSummarizer(summarizerList.get(0),summarizerList.get(1),false)));
+                    linguisticSummaryList.add(new LinguisticSummary(quantifier,complexSummarizer));
             }
         } else {
             for (Quantifier quantifier : quantifierList) {
-                linguisticSummaryList.add(new LinguisticSummary(quantifier,new ComplexQualifier(qualifierList.get(0),qualifierList.get(1),false),new ComplexSummarizer(summarizerList.get(0),summarizerList.get(1),false)));
+                linguisticSummaryList.add(new LinguisticSummary(quantifier,complexQualifier,complexSummarizer));
             }
         }
         for (LinguisticSummary summary : linguisticSummaryList){
-            summary.calculateMeasures(linguisticSummaryList,playerList);
+            //summary.calculateMeasures(linguisticSummaryList,playerList);
         }
         linguisticSummaryListProperty.set(FXCollections.observableArrayList(linguisticSummaryList));
         summList.itemsProperty().bind(linguisticSummaryListProperty);
+        //save();
     }
 
-    public void generateWithOr(){
+    public void generateWithOr() throws IOException {
         clearAll();
         chooseQualifiers();
         chooseSummarizers();
         loadData();
+        ComplexSummarizer complexSummarizer = new ComplexSummarizer(true);
+        complexSummarizer.addAll(summarizerList);
+        ComplexQualifier complexQualifier= new ComplexQualifier(true);
+        complexQualifier.addAll(qualifierList);
         if (qualifierList.isEmpty()){
             for (Quantifier quantifier : quantifierList) {
-                linguisticSummaryList.add(new LinguisticSummary(quantifier,new ComplexSummarizer(summarizerList.get(0),summarizerList.get(1),true)));
+                //ComplexQualifier complexQualifier = new ComplexQualifier(true);
+                linguisticSummaryList.add(new LinguisticSummary(quantifier,complexSummarizer));
+                //linguisticSummaryList.add(new LinguisticSummary(quantifier,new ComplexSummarizer(summarizerList.get(0),summarizerList.get(1),true)));
             }
         } else {
             for (Quantifier quantifier : quantifierList) {
-                linguisticSummaryList.add(new LinguisticSummary(quantifier,new ComplexQualifier(qualifierList.get(0),qualifierList.get(1),true),new ComplexSummarizer(summarizerList.get(0),summarizerList.get(1),true)));
+                linguisticSummaryList.add(new LinguisticSummary(quantifier,complexQualifier,complexSummarizer));
             }
         }
         for (LinguisticSummary summary : linguisticSummaryList){
-            summary.calculateMeasures(linguisticSummaryList,playerList);
+            //summary.calculateMeasures(linguisticSummaryList,playerList);
         }
         linguisticSummaryListProperty.set(FXCollections.observableArrayList(linguisticSummaryList));
         summList.itemsProperty().bind(linguisticSummaryListProperty);
+        save();
     }
 
     public void clearAll(){
@@ -741,7 +762,7 @@ public class Ksr2 {
         summarizerList.clear();
     }
 
-    public void generate(){
+    public void generate() throws IOException {
         clearAll();
         chooseQualifiers();
         chooseSummarizers();
@@ -764,10 +785,11 @@ public class Ksr2 {
             }
         }
         for (LinguisticSummary summary : linguisticSummaryList){
-            summary.calculateMeasures(linguisticSummaryList,playerList);
+            //summary.calculateMeasures(linguisticSummaryList,playerList);
         }
         linguisticSummaryListProperty.set(FXCollections.observableArrayList(linguisticSummaryList));
         summList.itemsProperty().bind(linguisticSummaryListProperty);
+        save();
     }
 
     public void addNewSummarizer(){
@@ -780,27 +802,153 @@ public class Ksr2 {
         }
     }
 
-    //public void addNewQuantifier
-
-    public void test(){
-        System.out.println("Hello World! test streamline object");
-        //Measures measures = new Measures();
-        System.out.println(playerList.size());
-        //double T1 = measures.T1(playerList);
-        //System.out.println(T1);
-        System.out.println(summarizerList.size());
-        System.out.println(summarizerList.get(0).getMembership(2));
-        StringBuilder summary = new StringBuilder();
-        for (Qualifier qualifier : qualifierList){
-            summary.append(qualifier.toString());
-            summary.append("basketball players are/have ");
-            for (Summarizer summarizer: summarizerList){
-                summary.append(summarizer.toString());
-            }
-
+    public void addNewQuantifier(){
+        if (newD.getText().equals("") && newC.getText().equals("")){
+            quantifierList.add(new Quantifier(newName.getText(),new GaussianFunction(),Double.parseDouble(newA.getText()),Double.parseDouble(newB.getText()),-1,-1,newAbsolute.isSelected()));
+        } else if (newD.getText().equals("")){
+            quantifierList.add(new Quantifier(newName.getText(),new TriangularFunction(),Double.parseDouble(newA.getText()),Double.parseDouble(newB.getText()),Double.parseDouble(newC.getText()),-1,newAbsolute.isSelected()));
+        } else {
+            quantifierList.add(new Quantifier(newName.getText(),new TrapezoidalFunction(),Double.parseDouble(newA.getText()),Double.parseDouble(newB.getText()),Double.parseDouble(newC.getText()),Double.parseDouble(newD.getText()),newAbsolute.isSelected()));
         }
-        System.out.println(summary.toString());
     }
+
+    public void addNewQualifiers(){
+        if (newD.getText().equals("") && newC.getText().equals("")){
+            qualifierList.add(new Qualifier(newName.getText(),new GaussianFunction(),Double.parseDouble(newA.getText()),Double.parseDouble(newB.getText()),-1,-1));
+        } else if (newD.getText().equals("")){
+            qualifierList.add(new Qualifier(newName.getText(),new TriangularFunction(),Double.parseDouble(newA.getText()),Double.parseDouble(newB.getText()),Double.parseDouble(newC.getText()),-1));
+        } else {
+            qualifierList.add(new Qualifier(newName.getText(),new TrapezoidalFunction(),Double.parseDouble(newA.getText()),Double.parseDouble(newB.getText()),Double.parseDouble(newC.getText()),Double.parseDouble(newD.getText())));
+        }
+    }
+
+
+
+    public void save() throws IOException {
+
+
+        List<List<LinguisticSummary>> rows = Collections.singletonList(linguisticSummaryList);
+
+        FileWriter csvWriter = new FileWriter("new.csv");
+        csvWriter.append("Name");
+        csvWriter.append(",");
+        csvWriter.append("\n");
+
+        for (List<LinguisticSummary> rowData : rows) {
+            csvWriter.append(rowData.toString());
+            csvWriter.append("\n");
+        }
+
+        csvWriter.flush();
+        csvWriter.close();
+    }
+
+
+
+
+//    @FXML
+//    ComboBox<String> comboBox1;
+//    @FXML
+//    TextField label = new TextField();
+//    @FXML
+//    TextField ax = new TextField();
+//    @FXML
+//    TextField bx = new TextField();
+//    @FXML
+//    TextField cx = new TextField();
+//    @FXML
+//    TextField dx = new TextField();
+    @FXML
+    public ComboBox<String> f; //liga
+    @FXML
+    public ComboBox<String> f1; //liga
+    @FXML
+    public ComboBox<String> k;  //kraj
+    @FXML
+    public ComboBox<String> k1;  //kraj
+
+    @FXML
+    public ComboBox<String> help;
+
+    @FXML
+    public ComboBox<Integer> help1;
+
+    @FXML
+    public void initialize() {
+        loadData();
+        chooseQuantifier();
+        help.getItems().addAll(Arrays.asList("Leagues","Nationalities"));
+        help1.getItems().addAll(Arrays.asList(1,2,3,4));
+        f.getItems().addAll(Arrays.asList("NBA","Euroleague", "Eurocup", "Australian-NBL", "German-BBL", "Italian-Lega-Basket-Serie-A", "Spanish-ACB","French-Jeep-Elite", "Argentinian-Liga-A","Balkan-BIL","Austrian-A-Bundesliga","Belarusian-BPL","Belgium-Scooore-League", "Bosnian-BiG-Liga","Brazylian-NBB","British-BBL","Bulgarian-NBL","Canadian-NBL","Chinese-CBA","Croatian-A-1-Liga","Czech-NBL","Danish-Basketligaen","Finnish-Korisliiga","Greek-HEBA-A1", "Hungarian-NBIA", "Israeli-BSL","Lithuanian-LKL", "Macedonian-Superleague", "Mexican-LNBP", "Netherlands-DBL", "New-Zealand-NBL", "Norwegian-BLNO","Polish-TBL","Romanian-Divizia-A", "Serbian-KLS", "Slovakian-Extraliga","Slovenian-SKL","South-Korean-KBL","Swedish-Basketligan", "Swiss-LNA", "Turkish-BSL", "Ukrainian-Superleague", "Georgian-Super-Liga", "Lebanese-Division-A", "Luxembourg-Total-League", "FIBA-Europe-Cup","Japanese-BLeague", "Kosovo-FBK"));
+        f1.getItems().addAll(Arrays.asList("NBA","Euroleague", "Eurocup", "Australian-NBL", "German-BBL", "Italian-Lega-Basket-Serie-A", "Spanish-ACB","French-Jeep-Elite", "Argentinian-Liga-A","Balkan-BIL","Austrian-A-Bundesliga","Belarusian-BPL","Belgium-Scooore-League", "Bosnian-BiG-Liga","Brazylian-NBB","British-BBL","Bulgarian-NBL","Canadian-NBL","Chinese-CBA","Croatian-A-1-Liga","Czech-NBL","Danish-Basketligaen","Finnish-Korisliiga","Greek-HEBA-A1", "Hungarian-NBIA", "Israeli-BSL","Lithuanian-LKL", "Macedonian-Superleague", "Mexican-LNBP", "Netherlands-DBL", "New-Zealand-NBL", "Norwegian-BLNO","Polish-TBL","Romanian-Divizia-A", "Serbian-KLS", "Slovakian-Extraliga","Slovenian-SKL","South-Korean-KBL","Swedish-Basketligan", "Swiss-LNA", "Turkish-BSL", "Ukrainian-Superleague", "Georgian-Super-Liga", "Lebanese-Division-A", "Luxembourg-Total-League", "FIBA-Europe-Cup","Japanese-BLeague", "Kosovo-FBK"));
+    }
+
+    protected ListProperty<MultiLinguisticSummary> multiLinguisticSummaryListProperty = new SimpleListProperty<>();
+
+    protected List<MultiLinguisticSummary> multiLinguisticSummaries = new ArrayList<>();
+
+    public void test2(){
+        List<Player> p1 = playerList;
+        List<Player> p2 = playerList;
+        String p1Name = "";
+        String p2Name = "";
+        String var = help.getValue();
+        if (var.equals("Leagues")){
+            p1Name = f.getValue();
+            String finalP1Name = p1Name;
+            p1.removeIf(player -> !player.getLeague().equals(finalP1Name));
+            p2Name = f1.getValue();
+            String finalP2Name = p2Name;
+            p2.removeIf(player -> !player.getLeague().equals(finalP2Name));
+        } else if (var.equals("Nationalities")){
+            p1Name = k.getValue();
+            String finalP1Name1 = p1Name;
+            p1.removeIf(player -> !player.getLeague().equals(finalP1Name1));
+            p2Name = k1.getValue();
+            String finalP2Name1 = p2Name;
+            p2.removeIf(player -> !player.getLeague().equals(finalP2Name1));
+        } else {
+            //abort
+        }
+        int form = help1.getValue();
+        if (form == 1) {
+            for (Quantifier quantifier : quantifierList){
+                for (Summarizer summarizer : summarizerList){
+                    multiLinguisticSummaries.add(new MultiLinguisticSummary(p1,p1Name,p2,p2Name,quantifier,summarizer,form));
+                }
+            }
+        }
+        else if (form == 2){
+            for (Quantifier quantifier : quantifierList){
+                for (Summarizer summarizer : summarizerList){
+                    for (Qualifier qualifier : qualifierList){
+                        multiLinguisticSummaries.add(new MultiLinguisticSummary(p1,p1Name,p2,p2Name,quantifier,summarizer,qualifier,form));
+                    }
+                }
+            }
+        }
+        else if (form == 3){
+            for (Quantifier quantifier : quantifierList){
+                for (Summarizer summarizer : summarizerList){
+                    for (Qualifier qualifier : qualifierList){
+                        multiLinguisticSummaries.add(new MultiLinguisticSummary(p1,p1Name,p2,p2Name,quantifier,summarizer,qualifier,form));
+                    }
+                }
+            }
+        }
+        else if (form == 4) {
+            for (Summarizer summarizer : summarizerList){
+                multiLinguisticSummaries.add(new MultiLinguisticSummary(p1,p1Name,p2,p2Name,summarizer,form));
+            }
+        }
+        multiLinguisticSummaryListProperty.set(FXCollections.observableArrayList(multiLinguisticSummaries));
+        summList.itemsProperty().bind(multiLinguisticSummaryListProperty);
+    }
+
+
+
+
+
 
 
 

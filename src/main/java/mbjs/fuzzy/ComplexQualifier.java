@@ -2,15 +2,13 @@ package mbjs.fuzzy;
 
 import mbjs.model.Player;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 public class ComplexQualifier extends Qualifier implements FuzzySet {
 
     Qualifier qualifier1;
     Qualifier qualifier2;
+    List<Qualifier> qualifiers = new ArrayList<>();
     boolean or;
 
     public ComplexQualifier(String name, MembershipFunction membershipFunction, double a, double b, double c, double d,Qualifier s1, Qualifier s2, boolean or) {
@@ -26,20 +24,59 @@ public class ComplexQualifier extends Qualifier implements FuzzySet {
         this.or = or;
     }
 
-    @Override
-    public String toString() {
-        if (or){
-            return qualifier1.toString() + " or "  + qualifier2.toString();
-        }else {
-            return qualifier1.toString() + " and "  + qualifier2.toString();
-        }
+    public ComplexQualifier(boolean or) {
+        this.or = or;
     }
 
-    public double getMembership(double x, double y) {
+    public boolean add(Qualifier qualifier) {
+        return qualifiers.add(qualifier);
+    }
+
+    public boolean addAll(Collection<? extends Qualifier> collection) {
+        return qualifiers.addAll(collection);
+    }
+
+    public List<Qualifier> getQualifiers() {
+        return qualifiers;
+    }
+
+    public int size() {
+        return qualifiers.size();
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder summary = new StringBuilder();
         if (or){
-            return Math.max(qualifier1.getMembership(x),qualifier2.getMembership(y));
+            for (Qualifier qualifier : qualifiers){
+                summary.append(qualifier.toString());
+                if (qualifiers.indexOf(qualifier) != qualifiers.size()-1){
+                    summary.append(" or ");
+                }
+            }
+        } else {
+            for (Qualifier qualifier : qualifiers){
+                summary.append(qualifier.toString());
+                if (qualifiers.indexOf(qualifier) != qualifiers.size()-1){
+                    summary.append(" and ");
+                }
+            }
+        }
+        return summary.toString();
+    }
+
+    public double getMembership(List<Player> players) {
+        List<Double> doubles = new ArrayList<>();
+        for (Qualifier qualifier : qualifiers){
+            for (Player player : players){
+                doubles.add(qualifier.getMembership(player.getPlayerStat(qualifier.name)));
+            }
+        }
+        Collections.sort(doubles);
+        if (or){
+            return doubles.get(doubles.size()-1);
         }else {
-            return Math.min(qualifier1.getMembership(x),qualifier2.getMembership(y));
+            return doubles.get(0);
         }
     }
 
@@ -47,24 +84,33 @@ public class ComplexQualifier extends Qualifier implements FuzzySet {
     public List<Player> support(List<Player> players) {
         List<Player> s1 = qualifier1.support(players);
         List<Player> s2 = qualifier2.support(players);
+        List<Player> supports = new ArrayList<>();
+        for (Qualifier qualifier : qualifiers){
+            supports.addAll(qualifier.support(players));
+        }
         if (or){
-            Set<Player> set = new HashSet<>();
-            set.addAll(s1);
-            set.addAll(s2);
+            Set<Player> set = new HashSet<>(supports);
             return new ArrayList<>(set);
-        } else {
+        } else { //todo and
             s1.retainAll(s2);
             return s1;
         }
-
     }
 
     public double getCardinality(){
-        return qualifier1.cardinality*qualifier2.cardinality;
+        double cardinality = 1.0;
+        for (Qualifier qualifier : qualifiers){
+            cardinality *= qualifier.cardinality;
+        }
+        return cardinality;
     }
 
     @Override
     public double getFuzziness(List<Player> players) {
-        return qualifier1.getFuzziness(players) * qualifier2.getFuzziness(players);
+        double fuzziness = 1.0;
+        for (Qualifier qualifier : qualifiers){
+            fuzziness *= qualifier.getFuzziness(players);
+        }
+        return fuzziness;
     }
 }

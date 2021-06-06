@@ -25,11 +25,11 @@ public class GaussianFunction implements MembershipFunction{
 
     @Override
     public double cardinality(double a, double b, double c, double d) {
-        return 0;
+        return 0;//todo do it finally
     }
 
     @Override
     public double support(double a, double b, double c, double d) {
-        return 0;
+        return 0;//todo do it finally
     }
 }

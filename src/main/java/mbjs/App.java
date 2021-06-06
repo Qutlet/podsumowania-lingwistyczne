@@ -18,9 +18,6 @@ public class App extends Application {
 
     @Override
     public void start(Stage stage) throws IOException {
-//        var javaVersion = SystemInfo.javaVersion();
-//        var javafxVersion = SystemInfo.javafxVersion();
-//
         var label = new Label("Hello, JavaFX , running on Java  + javaVersion + .");
         var scene = new Scene(new StackPane(label), 640, 480);
 

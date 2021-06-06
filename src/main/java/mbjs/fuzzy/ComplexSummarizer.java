@@ -8,6 +8,7 @@ public class ComplexSummarizer extends Summarizer implements FuzzySet{
 
     Summarizer summarizer1;
     Summarizer summarizer2;
+    List<Summarizer> summarizers = new ArrayList<>();
     boolean or;
 
     public ComplexSummarizer(String name, MembershipFunction membershipFunction, double a, double b, double c, double d,Summarizer s1, Summarizer s2, boolean or) {
@@ -23,20 +24,55 @@ public class ComplexSummarizer extends Summarizer implements FuzzySet{
         this.or = or;
     }
 
-    @Override
-    public String toString() {
-        if (or){
-            return summarizer1.toString() + " or "  + summarizer2.toString();
-        }else {
-            return summarizer1.toString() + " and "  + summarizer2.toString();
-        }
+    public ComplexSummarizer(boolean or) {
+        this.or = or;
     }
 
-    public double getMembership(double x, double y) {
+    public boolean addAll(Collection<? extends Summarizer> collection) {
+        return summarizers.addAll(collection);
+    }
+
+    public int size() {
+        return summarizers.size();
+    }
+
+    public List<Summarizer> getSummarizers() {
+        return summarizers;
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder summary = new StringBuilder();
         if (or){
-            return Math.max(summarizer1.getMembership(x),summarizer2.getMembership(y));
+            for (Summarizer qualifier : summarizers){
+                summary.append(qualifier.toString());
+                if (summarizers.indexOf(qualifier) != summarizers.size()-1){
+                    summary.append(" or ");
+                }
+            }
+        } else {
+            for (Summarizer qualifier : summarizers){
+                summary.append(qualifier.toString());
+                if (summarizers.indexOf(qualifier) != summarizers.size()-1){
+                    summary.append(" and ");
+                }
+            }
+        }
+        return summary.toString();
+    }
+
+    public double getMembership(List<Player> players) {
+        List<Double> doubles = new ArrayList<>();
+        for (Summarizer summarizer : summarizers){
+            for (Player player : players){
+                doubles.add(summarizer.getMembership(player.getPlayerStat(summarizer.name)));
+            }
+        }
+        Collections.sort(doubles);
+        if (or){
+            return doubles.get(doubles.size()-1);
         }else {
-            return Math.min(summarizer1.getMembership(x),summarizer2.getMembership(y));
+            return doubles.get(0);
         }
     }
 
@@ -57,11 +93,19 @@ public class ComplexSummarizer extends Summarizer implements FuzzySet{
     }
 
     public double getCardinality(){
-            return summarizer1.cardinality*summarizer2.cardinality;
+        double cardinality = 1.0;
+        for (Summarizer summarizer: summarizers){
+            cardinality *= summarizer.cardinality;
+        }
+        return cardinality;
     }
 
     @Override
     public double getFuzziness(List<Player> players) {
-        return summarizer1.getFuzziness(players) * summarizer2.getFuzziness(players);
+        double fuzziness = 1.0;
+        for (Summarizer summarizer: summarizers){
+            fuzziness *= summarizer.cardinality;
+        }
+        return fuzziness;
     }
 }
