@@ -64,7 +64,7 @@ public class MultiLinguisticSummary {
     private double getP1Cardinality(){
         double sum = 0.0;
         for (Player player : p1){
-            sum += summarizer.getMembership(player.getPlayerStat(summarizer.name));
+            sum += summarizer.getMembership(player);
         }
         return sum;
     }
@@ -72,7 +72,7 @@ public class MultiLinguisticSummary {
     private double getP2Cardinality(){
         double sum = 0.0;
         for (Player player : p2){
-            sum += summarizer.getMembership(player.getPlayerStat(summarizer.name));
+            sum += summarizer.getMembership(player);
         }
         return sum;
     }

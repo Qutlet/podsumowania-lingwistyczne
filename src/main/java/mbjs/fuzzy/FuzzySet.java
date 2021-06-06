@@ -6,7 +6,7 @@ import java.util.List;
 
 public interface FuzzySet {
 
-    double getMembership(double x);
+    double getMembership(Player player);
 
     List<Player> support(List<Player> players);
 

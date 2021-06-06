@@ -61,12 +61,12 @@ public class ComplexSummarizer extends Summarizer implements FuzzySet{
         return summary.toString();
     }
 
-    public double getMembership(List<Player> players) {
+    public double getMembership(Player player) {
         List<Double> doubles = new ArrayList<>();
         for (Summarizer summarizer : summarizers){
-            for (Player player : players){
-                doubles.add(summarizer.getMembership(player.getPlayerStat(summarizer.name)));
-            }
+
+                doubles.add(summarizer.getMembership(player));
+
         }
         Collections.sort(doubles);
         if (or){

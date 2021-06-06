@@ -34,15 +34,15 @@ public class Qualifier implements FuzzySet {
     }
 
     @Override
-    public double getMembership(double x) {
-        return membershipFunction.getMembership(a,b,c,d,x);
+    public double getMembership(Player player) {
+        return membershipFunction.getMembership(a,b,c,d,player.getPlayerStat(name));
     }
 
     @Override
     public List<Player> support(List<Player> players) {
         List<Player> support = new ArrayList<>();
         for (Player player : players) {
-            if (getMembership(player.getPlayerStat(name)) > 0) {
+            if (getMembership(player) > 0) {
                 support.add(player);
             }
         }

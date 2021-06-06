@@ -30,9 +30,13 @@ public class Quantifier implements FuzzySet {
         this.support = membershipFunction.support(a,b,c,d);
     }
 
-    @Override
     public double getMembership(double x){
         return membershipFunction.getMembership(a,b,c,d,x);
+    }
+
+    @Override
+    public double getMembership(Player player) {
+        return 0;
     }
 
     @Override

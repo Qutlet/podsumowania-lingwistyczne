@@ -65,12 +65,10 @@ public class ComplexQualifier extends Qualifier implements FuzzySet {
         return summary.toString();
     }
 
-    public double getMembership(List<Player> players) {
+    public double getMembership(Player player) {
         List<Double> doubles = new ArrayList<>();
         for (Qualifier qualifier : qualifiers){
-            for (Player player : players){
-                doubles.add(qualifier.getMembership(player.getPlayerStat(qualifier.name)));
-            }
+                doubles.add(qualifier.getMembership(player));
         }
         Collections.sort(doubles);
         if (or){
