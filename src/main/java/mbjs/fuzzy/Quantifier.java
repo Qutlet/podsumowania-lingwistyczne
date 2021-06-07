@@ -49,6 +49,11 @@ public class Quantifier implements FuzzySet {
         return 0;
     }
 
+    @Override
+    public double getCardinality(List<Player> players) {
+        return cardinality;
+    }
+
     public boolean isAbsolute() {
         return isAbsolute;
     }

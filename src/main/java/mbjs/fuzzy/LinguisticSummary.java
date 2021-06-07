@@ -2,8 +2,6 @@ package mbjs.fuzzy;
 
 import mbjs.model.Player;
 
-import java.io.FileWriter;
-import java.io.IOException;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
@@ -13,7 +11,7 @@ public class LinguisticSummary {
     Quantifier quantifier;
     Summarizer summarizer;
     Qualifier qualifier;
-    List<Double> measures;
+    double measures;
 
     public LinguisticSummary(Quantifier quantifier, Qualifier qualifier, Summarizer summarizer) {
         this.quantifier = quantifier;
@@ -33,13 +31,15 @@ public class LinguisticSummary {
         DecimalFormat df = new DecimalFormat("###.##");
         if (qualifier == null){
             String summary = quantifier + "basketball players are/have " + summarizer + " [";
-            for (Double measure : measures){
-                summary += (df.format(measure));
-                summary += (";");
-            }
+            summary += measures;
+//            for (Double measure : measures){
+//                summary += (df.format(measure));
+//                summary += (";");
+//            }
             return summary + "]\n";
         }else {
             String summary =quantifier + "basketball players who are/have " + qualifier + " are/have " + summarizer + " [";
+            summary += measures;
 //            for (Double measure : measures){
 //                summary += (df.format(measure));
 //                summary += (";");
@@ -77,7 +77,7 @@ public class LinguisticSummary {
 //                        pom2 += qualifier.getMembership(player);
 //                        sumB += qualifier.getMembership(player);
 //                    }
-//                    sum = Math.min(pom2,((ComplexSummarizer) summarizer).getMembership(players)); //todo zmienic getmembership na 1 player w complex
+//                    sum = Math.min(pom2,((ComplexSummarizer) summarizer).getMembership(players));
 //                }
 //                pom = quantifier.getMembership(sum / sumB);
 //            }
@@ -112,7 +112,7 @@ public class LinguisticSummary {
         return pom;
     }
 
-    public double T2(List<Player> players, List<LinguisticSummary> linguisticSummaries){ //co to za bydle
+    public double T2(List<Player> players){
         double pom =1.0;
 //        List<LinguisticSummary> linguisticSummaryList = new ArrayList<>();
 //        for (LinguisticSummary linguisticSummary : linguisticSummaries){
@@ -178,7 +178,7 @@ public class LinguisticSummary {
         }
     }
 
-    public double T4(List<Player> players, List<LinguisticSummary> linguisticSummaries){
+    public double T4(List<Player> players){
         double pom = 1.0;
             double pom2 = 0.0;
             for (Player player : players){
@@ -192,7 +192,7 @@ public class LinguisticSummary {
         return Math.abs(pom - T3(players));
     }
 
-    public double T5(List<LinguisticSummary> linguisticSummaries){
+    public double T5(){
         if (summarizer instanceof ComplexSummarizer){
             return 2 * Math.pow(0.5,((ComplexSummarizer) summarizer).size());
 
@@ -217,18 +217,19 @@ public class LinguisticSummary {
         }
     }
 
-    public double T8(List<Player> players, List<LinguisticSummary> linguisticSummaries){
+    public double T8(List<Player> players){
         double pom = 1.0;
         if (summarizer instanceof ComplexSummarizer){
-            pom *= ((ComplexSummarizer) summarizer).getCardinality() / players.size();
+            pom *= summarizer.getCardinality(players);
+            System.out.println(pom);
             return 1.0 - Math.pow(pom,1.0/((ComplexSummarizer) summarizer).size());
         } else {
-            pom *= summarizer.cardinality / players.size();
+            pom *= summarizer.getCardinality(players) / players.size();
             return 1.0 - Math.pow(pom,1.0/1);
         }
     }
 
-    public double T9(List<Player> players, List<LinguisticSummary> linguisticSummaries){
+    public double T9(List<Player> players){
         if (qualifier == null){
             return 0.0;
         }
@@ -240,13 +241,12 @@ public class LinguisticSummary {
             return 0.0;
         }
         if (qualifier instanceof ComplexQualifier){
-            return 1.0 - ((ComplexQualifier) qualifier).getCardinality() / players.size();
-        } else {
-            return 1.0 - qualifier.cardinality / players.size();
+            return 1.0 - qualifier.getCardinality(players);
         }
+        return 1.0 - qualifier.getCardinality(players) / players.size();
     }
 
-    public double T11(List<LinguisticSummary> linguisticSummaries){
+    public double T11(){
         if (qualifier == null){
             return 0.0;
         }
@@ -258,27 +258,27 @@ public class LinguisticSummary {
     }
 
 
-    public void calculateMeasures(List<LinguisticSummary> linguisticSummaries, List<Player> players){
+    public void calculateMeasures(List<Player> players){
         List<Double> measures = new ArrayList<>();
         measures.add(T1(players));
-        measures.add(T2(players,linguisticSummaries));
+        measures.add(T2(players));
         measures.add(T3(players));
-        measures.add(T4(players,linguisticSummaries));
-        measures.add(T5(linguisticSummaries));
+        measures.add(T4(players));
+        measures.add(T5());
         measures.add(T6(players));
         measures.add(T7(players));
-        measures.add(T8(players, linguisticSummaries));
-        measures.add(T9(players,linguisticSummaries));
+        measures.add(T8(players));
+        measures.add(T9(players));
         measures.add(T10(players));
-        measures.add(T11(linguisticSummaries));
-        measures.forEach(System.out::println);
+        measures.add(T11());
+        //measures.forEach(System.out::println);
         double pom = 0.0;
         for (Double me : measures){
             pom += ((1.0 / 11)*me);
-            System.out.println(me);
+            //System.out.println(me);
         }
-        System.out.println("nowe");
-        this.measures = measures;
+        //System.out.println("nowe");
+        this.measures = pom;
     }
 
 //    public void saveAsCsv(){

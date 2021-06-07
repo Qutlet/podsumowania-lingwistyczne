@@ -13,7 +13,7 @@ public class Summarizer implements FuzzySet {
     double b;
     double c;
     double d;
-    double cardinality;
+    //double cardinality;
 
     public Summarizer(String name, MembershipFunction membershipFunction, double a, double b, double c, double d) {
         this.name = name;
@@ -22,7 +22,6 @@ public class Summarizer implements FuzzySet {
         this.b = b;
         this.c = c;
         this.d = d;
-        this.cardinality = membershipFunction.cardinality(a,b,c,d);
     }
 
     public Summarizer() {
@@ -52,5 +51,14 @@ public class Summarizer implements FuzzySet {
     @Override
     public double getFuzziness(List<Player> players) {
         return  ((double) support(players).size()) / ((double) players.size());
+    }
+
+    @Override
+    public double getCardinality(List<Player> players) {
+        double sum = 0.0;
+        for (Player player : players){
+            sum += getMembership(player);
+        }
+        return sum;
     }
 }

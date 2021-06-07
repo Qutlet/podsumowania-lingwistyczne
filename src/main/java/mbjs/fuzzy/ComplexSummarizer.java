@@ -6,30 +6,15 @@ import java.util.*;
 
 public class ComplexSummarizer extends Summarizer implements FuzzySet{
 
-    Summarizer summarizer1;
-    Summarizer summarizer2;
     List<Summarizer> summarizers = new ArrayList<>();
     boolean or;
-
-    public ComplexSummarizer(String name, MembershipFunction membershipFunction, double a, double b, double c, double d,Summarizer s1, Summarizer s2, boolean or) {
-        super(name, membershipFunction, a, b, c, d);
-        this.summarizer1 = s1;
-        this.summarizer2 = s2;
-        this.or = or;
-    }
-
-    public ComplexSummarizer(Summarizer summarizer1, Summarizer summarizer2, boolean or) {
-        this.summarizer1 = summarizer1;
-        this.summarizer2 = summarizer2;
-        this.or = or;
-    }
 
     public ComplexSummarizer(boolean or) {
         this.or = or;
     }
 
-    public boolean addAll(Collection<? extends Summarizer> collection) {
-        return summarizers.addAll(collection);
+    public void addAll(Collection<? extends Summarizer> collection) {
+        summarizers.addAll(collection);
     }
 
     public int size() {
@@ -64,9 +49,7 @@ public class ComplexSummarizer extends Summarizer implements FuzzySet{
     public double getMembership(Player player) {
         List<Double> doubles = new ArrayList<>();
         for (Summarizer summarizer : summarizers){
-
-                doubles.add(summarizer.getMembership(player));
-
+            doubles.add(summarizer.getMembership(player));
         }
         Collections.sort(doubles);
         if (or){
@@ -78,34 +61,37 @@ public class ComplexSummarizer extends Summarizer implements FuzzySet{
 
     @Override
     public List<Player> support(List<Player> players) {
-        List<Player> s1 = summarizer1.support(players);
-        List<Player> s2 = summarizer2.support(players);
+        List<Player> supports = new ArrayList<>();
+        for (Summarizer summarizer : summarizers) {
+            supports.addAll(summarizer.support(players));
+        }
         if (or){
-            Set<Player> set = new HashSet<>();
-            set.addAll(s1);
-            set.addAll(s2);
+            Set<Player> set = new HashSet<>(supports);
             return new ArrayList<>(set);
         } else {
-            s1.retainAll(s2);
-            return s1;
+            for (Summarizer summarizer : summarizers) {
+                supports.retainAll(summarizer.support(players));
+            }
+            return supports;
         }
 
-    }
-
-    public double getCardinality(){
-        double cardinality = 1.0;
-        for (Summarizer summarizer: summarizers){
-            cardinality *= summarizer.cardinality;
-        }
-        return cardinality;
     }
 
     @Override
     public double getFuzziness(List<Player> players) {
         double fuzziness = 1.0;
         for (Summarizer summarizer: summarizers){
-            fuzziness *= summarizer.cardinality;
+            fuzziness *= summarizer.getFuzziness(players);
         }
         return fuzziness;
+    }
+
+    @Override
+    public double getCardinality(List<Player> players) {
+        double cardinality = 1.0;
+        for (Summarizer summarizer: summarizers){
+            cardinality *= summarizer.getCardinality(players) / players.size();
+        }
+        return cardinality;
     }
 }

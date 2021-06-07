@@ -2,7 +2,6 @@ package mbjs.fuzzy;
 
 import mbjs.model.Player;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class MultiLinguisticSummary {
@@ -49,13 +48,13 @@ public class MultiLinguisticSummary {
     @Override
     public String toString() {
         if (form == 1) {
-            return quantifier + "basketball player who are from " + p1Name + " compare to players from " + p2Name + " are/have " + summarizer;
+            return quantifier + "basketball player who are from " + p1Name + " compare to players from " + p2Name + " are/have " + summarizer + " [" + T() + "]";
         } else if (form == 2){
-            return quantifier + "basketball player who are from " + p1Name + " compare to players from " + p2Name + " who are " + qualifier + " are/have " +summarizer;
+            return quantifier + "basketball player who are from " + p1Name + " compare to players from " + p2Name + " who are " + qualifier + " are/have " +summarizer + " [" + T() + "]";
         } else if (form == 3){
-            return quantifier + "basketball player who are from " + p1Name + "who are " + qualifier + " compare to players from " + p2Name + " are/have " +summarizer;
+            return quantifier + "basketball player who are from " + p1Name + "who are " + qualifier + " compare to players from " + p2Name + " are/have " +summarizer + " [" + T() + "]";
         } else if (form == 4){
-            return "More basketball player who are from "+ p1Name + " than players who are from " + p2Name + " are/have " + summarizer;
+            return "More basketball player who are from "+ p1Name + " than players who are from " + p2Name + " are/have " + summarizer + " [" + T() + "]";
         } else {
             return "Error while creating summary";
         }
@@ -63,27 +62,50 @@ public class MultiLinguisticSummary {
 
     private double getP1Cardinality(){
         double sum = 0.0;
-        for (Player player : p1){
-            sum += summarizer.getMembership(player);
+        if (form == 1){
+            for (Player player : p1){
+                sum += summarizer.getMembership(player);
+            }
+        } else if (form == 2){
+            for (Player player : p1){
+                sum += summarizer.getMembership(player);
+            }
+        } else if (form == 3) {
+            for (Player player : p1) {
+                sum += Math.min(summarizer.getMembership(player),qualifier.getMembership(player));
+            }
         }
         return sum;
     }
 
     private double getP2Cardinality(){
         double sum = 0.0;
-        for (Player player : p2){
-            sum += summarizer.getMembership(player);
+        if (form == 1){
+            for (Player player : p2){
+                sum += summarizer.getMembership(player);
+            }
+        } else if (form == 2){
+            for (Player player : p2){
+                sum += Math.min(summarizer.getMembership(player),qualifier.getMembership(player));
+            }
+        } else if (form == 3) {
+            for (Player player : p2) {
+                sum += summarizer.getMembership(player);
+            }
         }
         return sum;
     }
 
-    private double T(){
-        if (form == 1){
+    private double T() {
+        if (form == 1 || form == 2 || form == 3){
             double up = getP1Cardinality() / p1.size();
             double down = getP1Cardinality() / p1.size() + getP2Cardinality() / p2.size();
-            return quantifier.getMembership(up /  down);
+            return quantifier.getMembership(up / down);
         } else {
-            return -1.0;
+            if (p1.size() > p2.size()){
+                return 1;
+            }
+            return 0;
         }
     }
 }

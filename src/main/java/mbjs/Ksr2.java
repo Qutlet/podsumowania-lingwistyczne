@@ -720,7 +720,7 @@ public class Ksr2 {
             }
         }
         for (LinguisticSummary summary : linguisticSummaryList){
-            //summary.calculateMeasures(linguisticSummaryList,playerList);
+            summary.calculateMeasures(playerList);
         }
         linguisticSummaryListProperty.set(FXCollections.observableArrayList(linguisticSummaryList));
         summList.itemsProperty().bind(linguisticSummaryListProperty);
@@ -748,7 +748,7 @@ public class Ksr2 {
             }
         }
         for (LinguisticSummary summary : linguisticSummaryList){
-            //summary.calculateMeasures(linguisticSummaryList,playerList);
+            summary.calculateMeasures(playerList);
         }
         linguisticSummaryListProperty.set(FXCollections.observableArrayList(linguisticSummaryList));
         summList.itemsProperty().bind(linguisticSummaryListProperty);
@@ -785,7 +785,7 @@ public class Ksr2 {
             }
         }
         for (LinguisticSummary summary : linguisticSummaryList){
-            //summary.calculateMeasures(linguisticSummaryList,playerList);
+            summary.calculateMeasures(playerList);
         }
         linguisticSummaryListProperty.set(FXCollections.observableArrayList(linguisticSummaryList));
         summList.itemsProperty().bind(linguisticSummaryListProperty);
@@ -879,6 +879,8 @@ public class Ksr2 {
         chooseQuantifier();
         help.getItems().addAll(Arrays.asList("Leagues","Nationalities"));
         help1.getItems().addAll(Arrays.asList(1,2,3,4));
+        k.getItems().addAll(Arrays.asList("United States","Jordan","Palestine","France","Senegal","Antigua and Barbuda","Italy","Democratic Republic of the Congo","Morocco","Belgium","Finland","Guam","Serbia","Norway","Central African Republic","Slovenia","Ivory Coast","Denmark","Netherlands","Romania","Canada","Bosnia and Herzegovina","South Korea","New Zealand","Australia","Russia","Lithuania","Hungary","Portugal","Dominican Republic","Austria","Argentina","Mali","England","Wales","Dominica","Bahamas","Switzerland","Haiti","Turkey","Poland","Germany","Croatia","Montenegro","Iraq","Sweden","China","Taiwan","Puerto Rico","Burundi","North Macedonia","Albania","Tunisia","Belarus","Cyprus","Angola","Greece","Egypt","Scotland","Azerbaijan","Brazil","Guinea-Bissau","Venezuela","Cameroon","Nigeria","U.S. Virgin Islands","Jamaica","Israel","Spain","Slovakia","Cuba","Iceland","Mexico","Czech Republic","Barbados","Ireland","Estonia","Qatar","Algeria","Lebanon","Gibraltar","Ukraine","Luxembourg","Uganda","Samoa","Bulgaria","Cape Verde","Mongolia","Trinidad and Tobago","Madagascar","Georgia","South Sudan","Panama","Kazakhstan","Ghana","Malta","Uruguay","Zimbabwe","Syria","Andorra","Republic of Suriname","Latvia","Saint Vincent and the Grenadines","Uzbekistan","Guyana","Kosovo","Gabon","Soa","Singapore","Chad","Moldova","Japan","South Africa","Rwanda","Philippines","Republic of the Congo","Colombia","Tanzania","Iran","Paraguay"));
+        k1.getItems().addAll(Arrays.asList("United States","Jordan","Palestine","France","Senegal","Antigua and Barbuda","Italy","Democratic Republic of the Congo","Morocco","Belgium","Finland","Guam","Serbia","Norway","Central African Republic","Slovenia","Ivory Coast","Denmark","Netherlands","Romania","Canada","Bosnia and Herzegovina","South Korea","New Zealand","Australia","Russia","Lithuania","Hungary","Portugal","Dominican Republic","Austria","Argentina","Mali","England","Wales","Dominica","Bahamas","Switzerland","Haiti","Turkey","Poland","Germany","Croatia","Montenegro","Iraq","Sweden","China","Taiwan","Puerto Rico","Burundi","North Macedonia","Albania","Tunisia","Belarus","Cyprus","Angola","Greece","Egypt","Scotland","Azerbaijan","Brazil","Guinea-Bissau","Venezuela","Cameroon","Nigeria","U.S. Virgin Islands","Jamaica","Israel","Spain","Slovakia","Cuba","Iceland","Mexico","Czech Republic","Barbados","Ireland","Estonia","Qatar","Algeria","Lebanon","Gibraltar","Ukraine","Luxembourg","Uganda","Samoa","Bulgaria","Cape Verde","Mongolia","Trinidad and Tobago","Madagascar","Georgia","South Sudan","Panama","Kazakhstan","Ghana","Malta","Uruguay","Zimbabwe","Syria","Andorra","Republic of Suriname","Latvia","Saint Vincent and the Grenadines","Uzbekistan","Guyana","Kosovo","Gabon","Soa","Singapore","Chad","Moldova","Japan","South Africa","Rwanda","Philippines","Republic of the Congo","Colombia","Tanzania","Iran","Paraguay"));
         f.getItems().addAll(Arrays.asList("NBA","Euroleague", "Eurocup", "Australian-NBL", "German-BBL", "Italian-Lega-Basket-Serie-A", "Spanish-ACB","French-Jeep-Elite", "Argentinian-Liga-A","Balkan-BIL","Austrian-A-Bundesliga","Belarusian-BPL","Belgium-Scooore-League", "Bosnian-BiG-Liga","Brazylian-NBB","British-BBL","Bulgarian-NBL","Canadian-NBL","Chinese-CBA","Croatian-A-1-Liga","Czech-NBL","Danish-Basketligaen","Finnish-Korisliiga","Greek-HEBA-A1", "Hungarian-NBIA", "Israeli-BSL","Lithuanian-LKL", "Macedonian-Superleague", "Mexican-LNBP", "Netherlands-DBL", "New-Zealand-NBL", "Norwegian-BLNO","Polish-TBL","Romanian-Divizia-A", "Serbian-KLS", "Slovakian-Extraliga","Slovenian-SKL","South-Korean-KBL","Swedish-Basketligan", "Swiss-LNA", "Turkish-BSL", "Ukrainian-Superleague", "Georgian-Super-Liga", "Lebanese-Division-A", "Luxembourg-Total-League", "FIBA-Europe-Cup","Japanese-BLeague", "Kosovo-FBK"));
         f1.getItems().addAll(Arrays.asList("NBA","Euroleague", "Eurocup", "Australian-NBL", "German-BBL", "Italian-Lega-Basket-Serie-A", "Spanish-ACB","French-Jeep-Elite", "Argentinian-Liga-A","Balkan-BIL","Austrian-A-Bundesliga","Belarusian-BPL","Belgium-Scooore-League", "Bosnian-BiG-Liga","Brazylian-NBB","British-BBL","Bulgarian-NBL","Canadian-NBL","Chinese-CBA","Croatian-A-1-Liga","Czech-NBL","Danish-Basketligaen","Finnish-Korisliiga","Greek-HEBA-A1", "Hungarian-NBIA", "Israeli-BSL","Lithuanian-LKL", "Macedonian-Superleague", "Mexican-LNBP", "Netherlands-DBL", "New-Zealand-NBL", "Norwegian-BLNO","Polish-TBL","Romanian-Divizia-A", "Serbian-KLS", "Slovakian-Extraliga","Slovenian-SKL","South-Korean-KBL","Swedish-Basketligan", "Swiss-LNA", "Turkish-BSL", "Ukrainian-Superleague", "Georgian-Super-Liga", "Lebanese-Division-A", "Luxembourg-Total-League", "FIBA-Europe-Cup","Japanese-BLeague", "Kosovo-FBK"));
     }

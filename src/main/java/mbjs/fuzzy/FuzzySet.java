@@ -11,4 +11,6 @@ public interface FuzzySet {
     List<Player> support(List<Player> players);
 
     double getFuzziness(List<Player> players);
+
+    double getCardinality(List<Player> players);
 }
