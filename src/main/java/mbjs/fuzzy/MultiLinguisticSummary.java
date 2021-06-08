@@ -102,10 +102,9 @@ public class MultiLinguisticSummary {
             double down = getP1Cardinality() / p1.size() + getP2Cardinality() / p2.size();
             return quantifier.getMembership(up / down);
         } else {
-            if (p1.size() > p2.size()){
-                return 1;
-            }
-            return 0;
+            double up = getP1Cardinality();
+            double down = getP1Cardinality() + getP2Cardinality();
+            return up /down;
         }
     }
 }
