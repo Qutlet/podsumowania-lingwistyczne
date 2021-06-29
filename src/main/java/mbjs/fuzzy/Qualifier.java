@@ -13,16 +13,17 @@ public class Qualifier implements FuzzySet {
     double b;
     double c;
     double d;
-    //double cardinality;
 
-    public Qualifier(String name, MembershipFunction membershipFunction, double a, double b, double c, double d) {
+    public Qualifier(String name, MembershipFunction membershipFunction, double a, double b, double c, double d, List<Player> players) {
         this.name = name;
         this.membershipFunction = membershipFunction;
         this.a = a;
         this.b = b;
         this.c = c;
         this.d = d;
-        //this.cardinality = membershipFunction.cardinality(a,b,c,d);
+        for (Player player : players) {
+            universe.add(player.getPlayerStat(name));
+        }
     }
 
     public Qualifier() {

@@ -4,12 +4,12 @@ import mbjs.model.Player;
 
 import java.util.*;
 
-public class ComplexSummarizer extends Summarizer implements FuzzySet{
+public class CompoundSummarizer extends Summarizer implements FuzzySet {
 
     List<Summarizer> summarizers = new ArrayList<>();
     boolean or;
 
-    public ComplexSummarizer(boolean or) {
+    public CompoundSummarizer(boolean or) {
         this.or = or;
     }
 

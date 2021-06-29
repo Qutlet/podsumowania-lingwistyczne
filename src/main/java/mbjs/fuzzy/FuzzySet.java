@@ -2,6 +2,7 @@ package mbjs.fuzzy;
 
 import mbjs.model.Player;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public interface FuzzySet {
@@ -13,6 +14,8 @@ public interface FuzzySet {
     double getFuzziness(List<Player> players);
 
     double getCardinality(List<Player> players);
+
+    List<Double> universe = new ArrayList<>();
 
 
 }

@@ -2,9 +2,6 @@ package mbjs.fuzzy;
 
 public class TrapezoidalFunction implements MembershipFunction {
 
-   // private static TrapezoidalFunction trapezoidalFunction = new TrapezoidalFunction();
-   // public static TrapezoidalFunction getInstance(){return trapezoidalFunction;}
-
     @Override
     public double getMembership(double a,double b, double c, double d, double x) {
         if (x <= a) {

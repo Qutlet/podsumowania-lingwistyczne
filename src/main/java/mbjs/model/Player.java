@@ -189,47 +189,6 @@ public class Player {
                 '}';
     }
 
-//    public double getPlayerStat(String statName) {
-//        if (statName.contains("GP")) {
-//            return GP;
-//        }
-//        if (statName.contains("FGM")) {
-//            return FGM;
-//        }
-//        if (statName.contains("3PM")) {
-//            return ThreePM;
-//        }
-//        if (statName.contains("TOV")) {
-//            return TOV;
-//        }
-//        if (statName.contains("PF")) {
-//            return PF;
-//        }
-//        if (statName.contains("REB")) {
-//            return REB;
-//        }
-//        if (statName.contains("AST")) {
-//            return AST;
-//        }
-//        if (statName.contains("STL")) {
-//            return STL;
-//        }
-//        if (statName.contains("BLK")) {
-//            return BLK;
-//        }
-//        if (statName.contains("PTS")) {
-//            return PTS;
-//        }
-//        if (statName.contains("height")) {
-//            return height;
-//        }
-//        if (statName.contains("weight")) {
-//            return weight;
-//        }
-//        return 0.0;
-//    }
-
-
     public double getPlayerStat(String statName){
         switch (statName) {
             case "a few GP":

@@ -4,12 +4,12 @@ import mbjs.model.Player;
 
 import java.util.*;
 
-public class ComplexQualifier extends Qualifier implements FuzzySet {
+public class CompoundQualifier extends Qualifier implements FuzzySet {
 
     List<Qualifier> qualifiers = new ArrayList<>();
     boolean or;
 
-    public ComplexQualifier(boolean or) {
+    public CompoundQualifier(boolean or) {
         this.or = or;
     }
 
